@@ -1,9 +1,11 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   MessageSquare,
   FileText,
@@ -19,11 +21,13 @@ import {
   VolumeX,
   PhoneOff,
   Send,
-  Save
+  Save,
+  X
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { mockClients } from "@/utils/mockClients";
 import { mockTeamMembers } from "@/utils/mockMeetings";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Import new meeting components
 import ParticipantGrid from "@/components/meetings/ParticipantGrid";
@@ -53,6 +57,7 @@ export default function MeetingInterface() {
   const navigate = useNavigate();
   const clientId = searchParams.get('client');
   const client = mockClients.find(c => c.id === clientId);
+  const isMobile = useIsMobile();
 
   // Meeting controls state
   const [isVideoOn, setIsVideoOn] = useState(true);
@@ -167,8 +172,6 @@ export default function MeetingInterface() {
   ]);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const chatScrollRef = useRef<HTMLDivElement>(null);
-  const notesScrollRef = useRef<HTMLDivElement>(null);
   const [meetingDuration, setMeetingDuration] = useState(0);
 
   useEffect(() => {
@@ -259,13 +262,6 @@ export default function MeetingInterface() {
 
     setChatMessages(prev => [...prev, newMsg]);
     setChatMessage("");
-    
-    // Auto-scroll to bottom
-    setTimeout(() => {
-      if (chatScrollRef.current) {
-        chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
-      }
-    }, 100);
   };
 
   const handleAddNote = () => {
@@ -281,13 +277,6 @@ export default function MeetingInterface() {
 
     setMeetingNotes(prev => [...prev, note]);
     setNewNote("");
-    
-    // Auto-scroll to bottom
-    setTimeout(() => {
-      if (notesScrollRef.current) {
-        notesScrollRef.current.scrollTop = notesScrollRef.current.scrollHeight;
-      }
-    }, 100);
   };
 
   const handleEndMeeting = () => {
@@ -327,126 +316,147 @@ export default function MeetingInterface() {
   return (
     <div className="h-screen bg-black flex flex-col overflow-hidden relative">
       {/* Top Bar */}
-      <div className="bg-gray-900 border-b-2 border-gray-700 p-4 flex items-center justify-between z-30">
-        <div className="flex items-center gap-4">
-          <Badge className="bg-red-500 text-white border-2 border-red-600 font-black animate-pulse">
+      <div className="bg-gray-900 border-b-2 border-gray-700 p-2 md:p-4 flex items-center justify-between z-30 shrink-0">
+        <div className="flex items-center gap-2 md:gap-4 min-w-0">
+          <Badge className="bg-red-500 text-white border-2 border-red-600 font-black animate-pulse text-xs">
             ● LIVE
           </Badge>
           {isRecording && (
-            <Badge className="bg-red-500 text-white border-2 border-red-600 font-black animate-pulse">
-              🔴 RECORDING
+            <Badge className="bg-red-500 text-white border-2 border-red-600 font-black animate-pulse text-xs">
+              🔴 REC
             </Badge>
           )}
-          <div>
-            <h2 className="text-white font-black text-lg uppercase">
-              Meeting with {client.full_name}
+          <div className="min-w-0">
+            <h2 className="text-white font-black text-sm md:text-lg uppercase truncate">
+              {isMobile ? client.full_name.split(' ')[0] : `Meeting with ${client.full_name}`}
             </h2>
-            <p className="text-gray-300 text-sm font-bold">
-              {client.company} • {formatDuration(meetingDuration)} • {participants.length + waitingParticipants.length} participants
+            <p className="text-gray-300 text-xs font-bold">
+              {!isMobile && `${client.company} • `}{formatDuration(meetingDuration)} • {participants.length + waitingParticipants.length}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           {waitingParticipants.length > 0 && (
-            <Badge className="bg-orange-500 text-white animate-bounce">
-              {waitingParticipants.length} in waiting room
+            <Badge className="bg-orange-500 text-white animate-bounce text-xs">
+              {waitingParticipants.length} waiting
             </Badge>
           )}
           {isLocked && (
-            <Badge className="bg-yellow-500 text-black">
+            <Badge className="bg-yellow-500 text-black text-xs">
               🔒 LOCKED
             </Badge>
           )}
         </div>
       </div>
 
-      <div className="flex-1 flex relative">
+      <div className="flex-1 flex relative overflow-hidden">
         {/* Main Video Area */}
-        <div className="flex-1 flex flex-col">
-          {/* Video Grid */}
-          <div className="flex-1 bg-gray-900 p-4">
-            <ParticipantGrid
-              participants={participants}
-              currentUser="manager"
-              viewMode={viewMode}
-              onParticipantAction={handleParticipantAction}
-            />
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Video Grid - Scrollable on smaller screens */}
+          <div className="flex-1 bg-gray-900 p-2 md:p-4 overflow-hidden">
+            <ScrollArea className="h-full">
+              <ParticipantGrid
+                participants={participants}
+                currentUser="manager"
+                viewMode={viewMode}
+                onParticipantAction={handleParticipantAction}
+              />
 
-            {/* Meeting Stats */}
-            <div className="mt-4 grid grid-cols-4 gap-4">
-              <div className="bg-gray-800 rounded-lg p-3 text-center neo-card">
-                <div className="text-green-500 font-black text-lg">{participants.filter(p => p.isOnline).length}</div>
-                <div className="text-gray-400 text-xs font-bold">ONLINE</div>
+              {/* Meeting Stats - Responsive Grid */}
+              <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                  <div className="text-green-500 font-black text-sm md:text-lg">{participants.filter(p => p.isOnline).length}</div>
+                  <div className="text-gray-400 text-xs font-bold">ONLINE</div>
+                </div>
+                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                  <div className="text-blue-500 font-black text-sm md:text-lg">{formatDuration(meetingDuration)}</div>
+                  <div className="text-gray-400 text-xs font-bold">TIME</div>
+                </div>
+                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                  <div className="text-purple-500 font-black text-sm md:text-lg">{isScreenSharing ? 'ON' : 'OFF'}</div>
+                  <div className="text-gray-400 text-xs font-bold">SHARE</div>
+                </div>
+                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                  <div className="text-orange-500 font-black text-sm md:text-lg">{chatMessages.length}</div>
+                  <div className="text-gray-400 text-xs font-bold">MSGS</div>
+                </div>
               </div>
-              <div className="bg-gray-800 rounded-lg p-3 text-center neo-card">
-                <div className="text-blue-500 font-black text-lg">{formatDuration(meetingDuration)}</div>
-                <div className="text-gray-400 text-xs font-bold">DURATION</div>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-3 text-center neo-card">
-                <div className="text-purple-500 font-black text-lg">{isScreenSharing ? 'ON' : 'OFF'}</div>
-                <div className="text-gray-400 text-xs font-bold">SHARING</div>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-3 text-center neo-card">
-                <div className="text-orange-500 font-black text-lg">{chatMessages.length}</div>
-                <div className="text-gray-400 text-xs font-bold">MESSAGES</div>
-              </div>
-            </div>
+            </ScrollArea>
           </div>
 
           {/* Enhanced Meeting Controls */}
-          <MeetingControls
-            isAudioOn={isAudioOn}
-            isVideoOn={isVideoOn}
-            isScreenSharing={isScreenSharing}
-            isRecording={isRecording}
-            isHandRaised={isHandRaised}
-            isMuted={isMuted}
-            viewMode={viewMode}
-            onToggleAudio={handleToggleAudio}
-            onToggleVideo={handleToggleVideo}
-            onToggleScreenShare={handleToggleScreenShare}
-            onToggleRecording={handleToggleRecording}
-            onToggleHand={handleToggleHand}
-            onToggleMute={handleToggleMute}
-            onToggleViewMode={handleToggleViewMode}
-            onShowParticipants={handleShowParticipants}
-            onShowChat={handleShowChat}
-            onShowNotes={handleShowNotes}
-            onShowSettings={handleShowSettings}
-            onShowReactions={handleShowReactions}
-            onShowWhiteboard={handleShowWhiteboard}
-            onBreakoutRooms={handleBreakoutRooms}
-            onEndMeeting={handleEndMeeting}
-          />
+          <div className="shrink-0">
+            <MeetingControls
+              isAudioOn={isAudioOn}
+              isVideoOn={isVideoOn}
+              isScreenSharing={isScreenSharing}
+              isRecording={isRecording}
+              isHandRaised={isHandRaised}
+              isMuted={isMuted}
+              viewMode={viewMode}
+              onToggleAudio={handleToggleAudio}
+              onToggleVideo={handleToggleVideo}
+              onToggleScreenShare={handleToggleScreenShare}
+              onToggleRecording={handleToggleRecording}
+              onToggleHand={handleToggleHand}
+              onToggleMute={handleToggleMute}
+              onToggleViewMode={handleToggleViewMode}
+              onShowParticipants={handleShowParticipants}
+              onShowChat={handleShowChat}
+              onShowNotes={handleShowNotes}
+              onShowSettings={handleShowSettings}
+              onShowReactions={handleShowReactions}
+              onShowWhiteboard={handleShowWhiteboard}
+              onBreakoutRooms={handleBreakoutRooms}
+              onEndMeeting={handleEndMeeting}
+            />
+          </div>
         </div>
 
+        {/* Mobile/Responsive Panels */}
         {/* Chat Panel */}
         {showChat && (
-          <div className="w-80 bg-white border-l-4 border-black flex flex-col">
-            <div className="border-b-4 border-black p-4">
+          <div className={`${
+            isMobile 
+              ? 'fixed inset-y-0 right-0 w-full z-40' 
+              : 'w-80 border-l-4 border-black'
+          } bg-white flex flex-col`}>
+            <div className="border-b-4 border-black p-4 flex items-center justify-between shrink-0">
               <h3 className="font-black text-gray-900 uppercase">Meeting Chat</h3>
+              {isMobile && (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => setShowChat(false)}
+                  className="neo-button"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              )}
             </div>
             
-            <div ref={chatScrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 max-h-[400px]" style={{ scrollBehavior: 'smooth' }}>
-              {chatMessages.map((msg) => (
-                <div key={msg.id} className={`p-2 rounded ${
-                  msg.type === 'system' 
-                    ? 'bg-gray-100 text-gray-600 text-center text-sm'
-                    : 'bg-blue-50 border border-blue-200'
-                }`}>
-                  {msg.type === 'user' && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-bold text-xs text-gray-600">{msg.sender}</span>
-                      <span className="text-xs text-gray-400">{msg.timestamp}</span>
-                    </div>
-                  )}
-                  <p className="text-sm">{msg.message}</p>
-                </div>
-              ))}
-            </div>
+            <ScrollArea className="flex-1 p-4">
+              <div className="space-y-3">
+                {chatMessages.map((msg) => (
+                  <div key={msg.id} className={`p-2 rounded ${
+                    msg.type === 'system' 
+                      ? 'bg-gray-100 text-gray-600 text-center text-sm'
+                      : 'bg-blue-50 border border-blue-200'
+                  }`}>
+                    {msg.type === 'user' && (
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-xs text-gray-600">{msg.sender}</span>
+                        <span className="text-xs text-gray-400">{msg.timestamp}</span>
+                      </div>
+                    )}
+                    <p className="text-sm">{msg.message}</p>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
 
-            <div className="border-t-4 border-black p-4">
+            <div className="border-t-4 border-black p-4 shrink-0">
               <div className="flex gap-2">
                 <Input
                   placeholder="Type a message..."
@@ -455,7 +465,7 @@ export default function MeetingInterface() {
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   className="neo-input"
                 />
-                <Button onClick={handleSendMessage} className="neo-button bg-blue-500 text-white">
+                <Button onClick={handleSendMessage} className="neo-button bg-blue-500 text-white shrink-0">
                   <Send className="w-4 h-4" />
                 </Button>
               </div>
@@ -465,28 +475,44 @@ export default function MeetingInterface() {
 
         {/* Notes Panel */}
         {showNotes && (
-          <div className="w-80 bg-white border-l-4 border-black flex flex-col">
-            <div className="border-b-4 border-black p-4">
+          <div className={`${
+            isMobile 
+              ? 'fixed inset-y-0 right-0 w-full z-40' 
+              : 'w-80 border-l-4 border-black'
+          } bg-white flex flex-col`}>
+            <div className="border-b-4 border-black p-4 flex items-center justify-between shrink-0">
               <h3 className="font-black text-gray-900 uppercase">Meeting Notes</h3>
+              {isMobile && (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => setShowNotes(false)}
+                  className="neo-button"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              )}
             </div>
             
-            <div ref={notesScrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 max-h-[400px]" style={{ scrollBehavior: 'smooth' }}>
-              {meetingNotes.map((note) => (
-                <div key={note.id} className={`p-3 border-2 rounded ${getNoteColor(note.type)}`}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-lg">{getNoteIcon(note.type)}</span>
-                    <span className="font-bold text-xs text-gray-600">{note.author}</span>
-                    <span className="text-xs text-gray-400">{note.timestamp}</span>
+            <ScrollArea className="flex-1 p-4">
+              <div className="space-y-3">
+                {meetingNotes.map((note) => (
+                  <div key={note.id} className={`p-3 border-2 rounded ${getNoteColor(note.type)}`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-lg">{getNoteIcon(note.type)}</span>
+                      <span className="font-bold text-xs text-gray-600">{note.author}</span>
+                      <span className="text-xs text-gray-400">{note.timestamp}</span>
+                    </div>
+                    <p className="text-sm font-medium">{note.content}</p>
+                    <Badge className="mt-2 text-xs font-bold">
+                      {note.type.replace('_', ' ').toUpperCase()}
+                    </Badge>
                   </div>
-                  <p className="text-sm font-medium">{note.content}</p>
-                  <Badge className="mt-2 text-xs font-bold">
-                    {note.type.replace('_', ' ').toUpperCase()}
-                  </Badge>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </ScrollArea>
 
-            <div className="border-t-4 border-black p-4 space-y-3">
+            <div className="border-t-4 border-black p-4 space-y-3 shrink-0">
               <select
                 value={noteType}
                 onChange={(e) => setNoteType(e.target.value as any)}
