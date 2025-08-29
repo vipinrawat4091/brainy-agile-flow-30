@@ -226,7 +226,7 @@ export default function MeetingControls({
           </DropdownMenu>
         </div>
 
-        {/* Right Controls - Compact */}
+        {/* Right Controls - Simplified */}
         <div className="flex items-center gap-1">
           <Button
             onClick={onToggleViewMode}
@@ -235,33 +235,6 @@ export default function MeetingControls({
           >
             {viewMode === 'gallery' ? <User className="w-3 h-3 md:w-4 md:h-4" /> : <Grid3X3 className="w-3 h-3 md:w-4 md:h-4" />}
             <span className="hidden lg:inline ml-1 text-xs">{viewMode === 'gallery' ? 'Speaker' : 'Gallery'}</span>
-          </Button>
-
-          <Button
-            onClick={onShowParticipants}
-            className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="sm"
-          >
-            <Users className="w-3 h-3 md:w-4 md:h-4" />
-            <span className="hidden lg:inline ml-1 text-xs">People</span>
-          </Button>
-
-          <Button
-            onClick={onShowChat}
-            className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="sm"
-          >
-            <MessageSquare className="w-3 h-3 md:w-4 md:h-4" />
-            <span className="hidden lg:inline ml-1 text-xs">Chat</span>
-          </Button>
-
-          <Button
-            onClick={onShowNotes}
-            className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="sm"
-          >
-            <FileText className="w-3 h-3 md:w-4 md:h-4" />
-            <span className="hidden lg:inline ml-1 text-xs">Notes</span>
           </Button>
 
           <Button
