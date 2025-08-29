@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,7 +11,7 @@ import {
   Hand,
   Pin,
   MessageSquare,
-  Spotlight,
+  Zap,
   UserMinus
 } from 'lucide-react';
 import { 
@@ -187,7 +186,7 @@ export default function ParticipantGrid({
                       onClick={(e) => handleParticipantAction(participant.id, 'spotlight', e)}
                       className="hover:bg-gray-100 cursor-pointer"
                     >
-                      <Spotlight className="w-4 h-4 mr-2" />
+                      <Zap className="w-4 h-4 mr-2" />
                       Spotlight for Everyone
                     </DropdownMenuItem>
                     {!participant.isHost && (
