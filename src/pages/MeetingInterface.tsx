@@ -68,6 +68,7 @@ export default function MeetingInterface() {
   const [isMuted, setIsMuted] = useState(false);
   const [viewMode, setViewMode] = useState<'gallery' | 'speaker'>('gallery');
   const [isLocked, setIsLocked] = useState(false);
+  const [fullscreenParticipant, setFullscreenParticipant] = useState<string | null>(null);
 
   // Panel states
   const [showChat, setShowChat] = useState(false);
@@ -210,6 +211,10 @@ export default function MeetingInterface() {
       }
       return p;
     }).filter(Boolean));
+  };
+
+  const handleFullscreenChange = (participantId: string | null) => {
+    setFullscreenParticipant(participantId);
   };
 
   const handleAdmitParticipant = (participantId: string) => {
@@ -393,27 +398,31 @@ export default function MeetingInterface() {
                 currentUser="manager"
                 viewMode={viewMode}
                 onParticipantAction={handleParticipantAction}
+                fullscreenParticipant={fullscreenParticipant}
+                onFullscreenChange={handleFullscreenChange}
               />
 
-              {/* Meeting Stats - Responsive Grid */}
-              <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
-                  <div className="text-green-500 font-black text-sm md:text-lg">{participants.filter(p => p.isOnline).length}</div>
-                  <div className="text-gray-400 text-xs font-bold">ONLINE</div>
+              {/* Meeting Stats - Only show when not in fullscreen mode */}
+              {!fullscreenParticipant && (
+                <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                  <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                    <div className="text-green-500 font-black text-sm md:text-lg">{participants.filter(p => p.isOnline).length}</div>
+                    <div className="text-gray-400 text-xs font-bold">ONLINE</div>
+                  </div>
+                  <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                    <div className="text-blue-500 font-black text-sm md:text-lg">{formatDuration(meetingDuration)}</div>
+                    <div className="text-gray-400 text-xs font-bold">TIME</div>
+                  </div>
+                  <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                    <div className="text-purple-500 font-black text-sm md:text-lg">{isScreenSharing ? 'ON' : 'OFF'}</div>
+                    <div className="text-gray-400 text-xs font-bold">SHARE</div>
+                  </div>
+                  <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
+                    <div className="text-orange-500 font-black text-sm md:text-lg">{chatMessages.length}</div>
+                    <div className="text-gray-400 text-xs font-bold">MSGS</div>
+                  </div>
                 </div>
-                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
-                  <div className="text-blue-500 font-black text-sm md:text-lg">{formatDuration(meetingDuration)}</div>
-                  <div className="text-gray-400 text-xs font-bold">TIME</div>
-                </div>
-                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
-                  <div className="text-purple-500 font-black text-sm md:text-lg">{isScreenSharing ? 'ON' : 'OFF'}</div>
-                  <div className="text-gray-400 text-xs font-bold">SHARE</div>
-                </div>
-                <div className="bg-gray-800 rounded-lg p-2 md:p-3 text-center neo-card">
-                  <div className="text-orange-500 font-black text-sm md:text-lg">{chatMessages.length}</div>
-                  <div className="text-gray-400 text-xs font-bold">MSGS</div>
-                </div>
-              </div>
+              )}
             </ScrollArea>
           </div>
 
