@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -85,16 +86,16 @@ export default function MeetingControls({
   const [showMoreOptions, setShowMoreOptions] = useState(false);
 
   return (
-    <div className="bg-gray-900 border-t-2 border-gray-700 p-4">
-      <div className="flex items-center justify-between">
-        {/* Left Controls */}
-        <div className="flex items-center gap-2">
+    <div className="bg-gray-900 border-t-2 border-gray-700 p-2 md:p-4">
+      <div className="flex items-center justify-between gap-1 md:gap-2">
+        {/* Left Controls - Audio/Video */}
+        <div className="flex items-center gap-1">
           <Button
             onClick={onToggleAudio}
             className={`neo-button ${isAudioOn ? 'bg-gray-700 text-white hover:bg-gray-600' : 'bg-red-500 text-white hover:bg-red-600'} font-black`}
-            size="lg"
+            size="sm"
           >
-            {isAudioOn ? <Mic className="w-5 h-5" /> : <MicOff className="w-5 h-5" />}
+            {isAudioOn ? <Mic className="w-3 h-3 md:w-4 md:h-4" /> : <MicOff className="w-3 h-3 md:w-4 md:h-4" />}
           </Button>
 
           <DropdownMenu>
@@ -102,12 +103,12 @@ export default function MeetingControls({
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-gray-700 text-white border-gray-600"
+                className="bg-gray-700 text-white border-gray-600 p-1 md:p-2"
               >
-                ▲
+                <span className="text-xs">▲</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="bg-white z-50">
               <DropdownMenuItem>Microphone Settings</DropdownMenuItem>
               <DropdownMenuItem>Test Speaker & Microphone</DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -119,9 +120,9 @@ export default function MeetingControls({
           <Button
             onClick={onToggleVideo}
             className={`neo-button ${isVideoOn ? 'bg-gray-700 text-white hover:bg-gray-600' : 'bg-red-500 text-white hover:bg-red-600'} font-black`}
-            size="lg"
+            size="sm"
           >
-            {isVideoOn ? <Video className="w-5 h-5" /> : <VideoOff className="w-5 h-5" />}
+            {isVideoOn ? <Video className="w-3 h-3 md:w-4 md:h-4" /> : <VideoOff className="w-3 h-3 md:w-4 md:h-4" />}
           </Button>
 
           <DropdownMenu>
@@ -129,12 +130,12 @@ export default function MeetingControls({
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-gray-700 text-white border-gray-600"
+                className="bg-gray-700 text-white border-gray-600 p-1 md:p-2"
               >
-                ▲
+                <span className="text-xs">▲</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="bg-white z-50">
               <DropdownMenuItem>
                 <Camera className="w-4 h-4 mr-2" />
                 Camera Settings
@@ -147,55 +148,55 @@ export default function MeetingControls({
           </DropdownMenu>
         </div>
 
-        {/* Center Controls */}
-        <div className="flex items-center gap-3">
+        {/* Center Controls - More Compact */}
+        <div className="flex items-center gap-1 flex-1 justify-center overflow-x-auto">
           <Button
             onClick={onToggleScreenShare}
-            className={`neo-button ${isScreenSharing ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-700 text-white hover:bg-gray-600'} font-black`}
-            size="lg"
+            className={`neo-button ${isScreenSharing ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-700 text-white hover:bg-gray-600'} font-black whitespace-nowrap`}
+            size="sm"
           >
-            <MonitorSpeaker className="w-5 h-5" />
-            {isScreenSharing ? 'Stop Share' : 'Share Screen'}
+            <MonitorSpeaker className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden md:inline ml-1 text-xs">Share</span>
           </Button>
 
           <Button
             onClick={onToggleRecording}
             className={`neo-button ${isRecording ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-gray-700 text-white hover:bg-gray-600'} font-black`}
-            size="lg"
+            size="sm"
           >
-            {isRecording ? <Pause className="w-5 h-5" /> : <Circle className="w-5 h-5" />}
-            {isRecording ? 'Pause' : 'Record'}
+            {isRecording ? <Pause className="w-3 h-3 md:w-4 md:h-4" /> : <Circle className="w-3 h-3 md:w-4 md:h-4" />}
+            <span className="hidden md:inline ml-1 text-xs">{isRecording ? 'Pause' : 'Rec'}</span>
           </Button>
 
           <Button
             onClick={onShowReactions}
             className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="lg"
+            size="sm"
           >
-            <Smile className="w-5 h-5" />
-            Reactions
+            <Smile className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden md:inline ml-1 text-xs">React</span>
           </Button>
 
           <Button
             onClick={onToggleHand}
             className={`neo-button ${isHandRaised ? 'bg-yellow-500 text-black hover:bg-yellow-600' : 'bg-gray-700 text-white hover:bg-gray-600'} font-black`}
-            size="lg"
+            size="sm"
           >
-            <Hand className="w-5 h-5" />
-            {isHandRaised ? 'Lower Hand' : 'Raise Hand'}
+            <Hand className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden md:inline ml-1 text-xs">{isHandRaised ? 'Lower' : 'Hand'}</span>
           </Button>
 
           <DropdownMenu open={showMoreOptions} onOpenChange={setShowMoreOptions}>
             <DropdownMenuTrigger asChild>
               <Button
                 className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-                size="lg"
+                size="sm"
               >
-                <MoreHorizontal className="w-5 h-5" />
-                More
+                <MoreHorizontal className="w-3 h-3 md:w-4 md:h-4" />
+                <span className="hidden md:inline ml-1 text-xs">More</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
+            <DropdownMenuContent className="w-56 bg-white z-50">
               <DropdownMenuItem onClick={onShowWhiteboard}>
                 <Edit3 className="w-4 h-4 mr-2" />
                 Whiteboard
@@ -225,59 +226,59 @@ export default function MeetingControls({
           </DropdownMenu>
         </div>
 
-        {/* Right Controls */}
-        <div className="flex items-center gap-2">
+        {/* Right Controls - Compact */}
+        <div className="flex items-center gap-1">
           <Button
             onClick={onToggleViewMode}
             className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="lg"
+            size="sm"
           >
-            {viewMode === 'gallery' ? <User className="w-5 h-5" /> : <Grid3X3 className="w-5 h-5" />}
-            {viewMode === 'gallery' ? 'Speaker' : 'Gallery'}
+            {viewMode === 'gallery' ? <User className="w-3 h-3 md:w-4 md:h-4" /> : <Grid3X3 className="w-3 h-3 md:w-4 md:h-4" />}
+            <span className="hidden lg:inline ml-1 text-xs">{viewMode === 'gallery' ? 'Speaker' : 'Gallery'}</span>
           </Button>
 
           <Button
             onClick={onShowParticipants}
             className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="lg"
+            size="sm"
           >
-            <Users className="w-5 h-5" />
-            Participants
+            <Users className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden lg:inline ml-1 text-xs">People</span>
           </Button>
 
           <Button
             onClick={onShowChat}
             className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="lg"
+            size="sm"
           >
-            <MessageSquare className="w-5 h-5" />
-            Chat
+            <MessageSquare className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden lg:inline ml-1 text-xs">Chat</span>
           </Button>
 
           <Button
             onClick={onShowNotes}
             className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="lg"
+            size="sm"
           >
-            <FileText className="w-5 h-5" />
-            Notes
+            <FileText className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden lg:inline ml-1 text-xs">Notes</span>
           </Button>
 
           <Button
             onClick={onShowSettings}
             className="neo-button bg-gray-700 text-white hover:bg-gray-600 font-black"
-            size="lg"
+            size="sm"
           >
-            <Settings className="w-5 h-5" />
+            <Settings className="w-3 h-3 md:w-4 md:h-4" />
           </Button>
 
           <Button
             onClick={onEndMeeting}
-            className="neo-button bg-red-500 text-white hover:bg-red-600 font-black px-6"
-            size="lg"
+            className="neo-button bg-red-500 text-white hover:bg-red-600 font-black px-2 md:px-4"
+            size="sm"
           >
-            <PhoneOff className="w-5 h-5 mr-2" />
-            End
+            <PhoneOff className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="hidden md:inline ml-1 text-xs">End</span>
           </Button>
         </div>
       </div>
