@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,7 +21,8 @@ import {
   PhoneOff,
   Send,
   Save,
-  X
+  X,
+  Users
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { mockClients } from "@/utils/mockClients";
@@ -336,7 +336,8 @@ export default function MeetingInterface() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Enhanced Right Side Controls */}
+        <div className="flex items-center gap-1 md:gap-2 shrink-0">
           {waitingParticipants.length > 0 && (
             <Badge className="bg-orange-500 text-white animate-bounce text-xs">
               {waitingParticipants.length} waiting
@@ -347,6 +348,37 @@ export default function MeetingInterface() {
               🔒 LOCKED
             </Badge>
           )}
+          
+          {/* Quick Access Buttons - Always visible */}
+          <Button
+            onClick={handleShowParticipants}
+            className={`neo-button ${showParticipants ? 'bg-blue-500' : 'bg-gray-700'} text-white hover:bg-gray-600 font-black p-2 md:px-3`}
+            size="sm"
+            title="Participants"
+          >
+            <Users className="w-4 h-4 md:mr-1" />
+            {!isMobile && <span className="text-xs">Participants</span>}
+          </Button>
+
+          <Button
+            onClick={handleShowChat}
+            className={`neo-button ${showChat ? 'bg-blue-500' : 'bg-gray-700'} text-white hover:bg-gray-600 font-black p-2 md:px-3`}
+            size="sm"
+            title="Chat"
+          >
+            <MessageSquare className="w-4 h-4 md:mr-1" />
+            {!isMobile && <span className="text-xs">Chat</span>}
+          </Button>
+
+          <Button
+            onClick={handleShowNotes}
+            className={`neo-button ${showNotes ? 'bg-blue-500' : 'bg-gray-700'} text-white hover:bg-gray-600 font-black p-2 md:px-3`}
+            size="sm"
+            title="Notes"
+          >
+            <FileText className="w-4 h-4 md:mr-1" />
+            {!isMobile && <span className="text-xs">Notes</span>}
+          </Button>
         </div>
       </div>
 
