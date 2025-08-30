@@ -6,90 +6,96 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 0 0% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 219 100% 56%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
+    --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
     --accent: 210 40% 98%;
     --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 219 100% 56%;
     --radius: 0.75rem;
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 3.9%;
-    --sidebar-primary: 0 0% 9%;
+    --sidebar-foreground: 0 0% 9%;
+    --sidebar-primary: 219 100% 56%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96.1%;
+    --sidebar-accent: 0 0% 96%;
     --sidebar-accent-foreground: 0 0% 9%;
-    --sidebar-border: 0 0% 89.8%;
-    --sidebar-ring: 0 0% 3.9%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 219 100% 56%;
     
-    /* Design System Colors */
-    --notion-gray-100: 0 0% 97%;
-    --notion-gray-200: 0 0% 95%;
-    --notion-gray-300: 0 0% 90%;
-    --notion-gray-400: 0 0% 70%;
-    --notion-gray-500: 0 0% 50%;
-    --notion-gray-600: 0 0% 30%;
-    --notion-blue: 210 100% 50%;
-    --notion-purple: 250 100% 60%;
+    /* Material Design Colors */
+    --md-primary: 219 100% 56%;
+    --md-primary-variant: 219 100% 46%;
+    --md-secondary: 45 100% 51%;
+    --md-secondary-variant: 45 100% 41%;
+    --md-surface: 0 0% 100%;
+    --md-surface-variant: 0 0% 96%;
+    --md-background: 0 0% 98%;
+    --md-error: 0 84% 60%;
+    --md-on-primary: 0 0% 100%;
+    --md-on-secondary: 0 0% 0%;
+    --md-on-surface: 0 0% 9%;
+    --md-on-background: 0 0% 9%;
+    --md-on-error: 0 0% 100%;
+    --md-outline: 0 0% 74%;
+    --md-outline-variant: 0 0% 84%;
   }
 
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 0 0% 9%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
+    --card: 0 0% 12%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
+    --popover: 0 0% 9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --primary: 219 100% 66%;
     --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 15%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 0 0% 3.9%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 219 100% 66%;
+    --sidebar-background: 0 0% 9%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary: 219 100% 66%;
     --sidebar-primary-foreground: 0 0% 9%;
-    --sidebar-accent: 0 0% 14.9%;
+    --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 14.9%;
-    --sidebar-ring: 0 0% 83.1%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 219 100% 66%;
     
-    --notion-gray-100: 0 0% 7%;
-    --notion-gray-200: 0 0% 10%;
-    --notion-gray-300: 0 0% 15%;
-    --notion-gray-400: 0 0% 30%;
-    --notion-gray-500: 0 0% 50%;
-    --notion-gray-600: 0 0% 70%;
+    --md-primary: 219 100% 66%;
+    --md-primary-variant: 219 100% 56%;
+    --md-secondary: 45 100% 61%;
+    --md-secondary-variant: 45 100% 51%;
+    --md-surface: 0 0% 12%;
+    --md-surface-variant: 0 0% 15%;
+    --md-background: 0 0% 9%;
+    --md-error: 0 84% 70%;
+    --md-on-primary: 0 0% 0%;
+    --md-on-secondary: 0 0% 0%;
+    --md-on-surface: 0 0% 98%;
+    --md-on-background: 0 0% 98%;
+    --md-on-error: 0 0% 0%;
+    --md-outline: 0 0% 64%;
+    --md-outline-variant: 0 0% 45%;
   }
 }
 
@@ -97,98 +103,315 @@
   * {
     @apply border-border;
   }
+  
   body {
-    @apply bg-background text-foreground font-sans;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    font-size: 15px;
+    @apply bg-background text-foreground;
+    font-family: 'Roboto', 'Google Sans', 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Google Sans', 'Roboto', system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 }
 
 @layer components {
-  /* Design System Components */
-  .notion-card {
-    @apply bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200;
+  /* Material Design Elevation System */
+  .md-elevation-0 {
+    box-shadow: none;
   }
   
-  .notion-button {
-    @apply inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+  .md-elevation-1 {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
   
-  .notion-button-primary {
-    @apply notion-button bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2;
+  .md-elevation-2 {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
   
-  .notion-button-secondary {
-    @apply notion-button bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-4 py-2;
+  .md-elevation-3 {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
   
-  .notion-button-ghost {
-    @apply notion-button hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2;
+  .md-elevation-4 {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
   
-  .notion-input {
-    @apply flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  .md-elevation-5 {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Material Design Cards */
+  .md-card {
+    @apply bg-card border-0 rounded-xl md-elevation-1 transition-all duration-200;
   }
   
-  .notion-sidebar {
-    @apply bg-sidebar border-r border-sidebar-border;
+  .md-card:hover {
+    @apply md-elevation-2;
+    transform: translateY(-1px);
   }
   
-  .notion-page-header {
-    @apply flex items-center justify-between p-6 border-b border-border bg-background/50 backdrop-blur-sm;
+  .md-card-elevated {
+    @apply md-card md-elevation-2;
   }
   
-  .notion-content {
-    @apply p-6 max-w-none;
+  .md-card-elevated:hover {
+    @apply md-elevation-3;
+    transform: translateY(-2px);
+  }
+
+  /* Material Design Buttons */
+  .md-button {
+    @apply inline-flex items-center justify-center rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden;
   }
   
-  .notion-block {
-    @apply mb-4 last:mb-0;
+  .md-button::before {
+    content: '';
+    @apply absolute inset-0 bg-current opacity-0 transition-opacity duration-200 rounded-full;
   }
   
-  .notion-heading {
-    @apply font-semibold text-foreground mb-3;
+  .md-button:hover::before {
+    @apply opacity-8;
   }
   
-  .notion-heading-1 {
-    @apply notion-heading text-2xl;
+  .md-button:active {
+    transform: scale(0.98);
   }
   
-  .notion-heading-2 {
-    @apply notion-heading text-xl;
+  .md-button-filled {
+    @apply md-button bg-primary text-primary-foreground h-10 px-6 md-elevation-1;
   }
   
-  .notion-heading-3 {
-    @apply notion-heading text-lg;
+  .md-button-filled:hover {
+    @apply md-elevation-2;
   }
   
-  .notion-text {
-    @apply text-foreground leading-relaxed;
+  .md-button-outlined {
+    @apply md-button border border-outline bg-transparent text-primary h-10 px-6;
   }
   
-  .notion-muted {
-    @apply text-muted-foreground text-sm;
+  .md-button-text {
+    @apply md-button bg-transparent text-primary h-10 px-4;
   }
   
-  .chat-bubble {
-    @apply max-w-sm rounded-xl px-4 py-2 shadow-sm;
+  .md-button-fab {
+    @apply md-button bg-primary text-primary-foreground w-14 h-14 rounded-full md-elevation-2;
   }
   
-  .chat-bubble-sent {
-    @apply chat-bubble bg-primary text-primary-foreground ml-auto;
+  .md-button-fab:hover {
+    @apply md-elevation-3;
+  }
+
+  /* Material Design Input Fields */
+  .md-input {
+    @apply w-full rounded-lg border border-outline bg-surface px-4 py-3 text-sm transition-all duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
   }
   
-  .chat-bubble-received {
-    @apply chat-bubble bg-muted text-muted-foreground mr-auto;
+  .md-input-outlined {
+    @apply md-input border-2;
+  }
+  
+  .md-input-filled {
+    @apply md-input bg-surface-variant border-0 border-b-2 border-outline rounded-b-none rounded-t-lg focus:border-primary;
+  }
+
+  /* Material Design Navigation */
+  .md-nav-rail {
+    @apply bg-surface border-r border-outline md-elevation-0 transition-all duration-300;
+  }
+  
+  .md-nav-drawer {
+    @apply bg-surface md-elevation-1 transition-all duration-300;
+  }
+  
+  .md-nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-full text-sm font-medium transition-all duration-200 relative overflow-hidden;
+  }
+  
+  .md-nav-item::before {
+    content: '';
+    @apply absolute inset-0 bg-primary opacity-0 transition-all duration-200 rounded-full;
+  }
+  
+  .md-nav-item:hover::before {
+    @apply opacity-8;
+  }
+  
+  .md-nav-item.active {
+    @apply bg-primary/12 text-primary;
+  }
+  
+  .md-nav-item.active::before {
+    @apply opacity-12;
+  }
+
+  /* Material Design Typography */
+  .md-headline-large {
+    @apply text-3xl font-normal tracking-tight;
+  }
+  
+  .md-headline-medium {
+    @apply text-2xl font-normal tracking-tight;
+  }
+  
+  .md-headline-small {
+    @apply text-xl font-normal tracking-tight;
+  }
+  
+  .md-title-large {
+    @apply text-lg font-medium;
+  }
+  
+  .md-title-medium {
+    @apply text-base font-medium;
+  }
+  
+  .md-title-small {
+    @apply text-sm font-medium;
+  }
+  
+  .md-body-large {
+    @apply text-base;
+  }
+  
+  .md-body-medium {
+    @apply text-sm;
+  }
+  
+  .md-body-small {
+    @apply text-xs;
+  }
+  
+  .md-label-large {
+    @apply text-sm font-medium;
+  }
+  
+  .md-label-medium {
+    @apply text-xs font-medium uppercase tracking-wider;
+  }
+  
+  .md-label-small {
+    @apply text-xs font-medium uppercase tracking-wider;
+  }
+
+  /* Material Design Surfaces */
+  .md-surface {
+    @apply bg-surface text-on-surface;
+  }
+  
+  .md-surface-variant {
+    @apply bg-surface-variant text-on-surface;
+  }
+  
+  .md-surface-container {
+    @apply bg-surface md-elevation-1 rounded-xl;
+  }
+  
+  .md-surface-container-low {
+    @apply bg-surface md-elevation-0 rounded-xl;
+  }
+  
+  .md-surface-container-high {
+    @apply bg-surface md-elevation-2 rounded-xl;
+  }
+
+  /* Ripple Effect */
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  
+  .ripple {
+    @apply absolute rounded-full bg-current pointer-events-none;
+    animation: ripple 600ms linear;
+  }
+
+  /* Floating Action Button */
+  .md-fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 bg-primary text-primary-foreground rounded-full md-elevation-3 transition-all duration-200 flex items-center justify-center;
+  }
+  
+  .md-fab:hover {
+    @apply md-elevation-4;
+    transform: scale(1.05);
+  }
+
+  /* Material Design List */
+  .md-list {
+    @apply bg-surface rounded-xl md-elevation-0;
+  }
+  
+  .md-list-item {
+    @apply flex items-center gap-4 px-4 py-3 transition-colors duration-200 hover:bg-surface-variant border-b border-outline/20 last:border-b-0;
+  }
+  
+  .md-list-item:first-child {
+    @apply rounded-t-xl;
+  }
+  
+  .md-list-item:last-child {
+    @apply rounded-b-xl;
+  }
+
+  /* Material Design Chips */
+  .md-chip {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border border-outline;
+  }
+  
+  .md-chip-filled {
+    @apply md-chip bg-primary text-primary-foreground border-primary;
+  }
+  
+  .md-chip-outlined {
+    @apply md-chip bg-transparent text-on-surface;
+  }
+
+  /* Material Design Dividers */
+  .md-divider {
+    @apply border-0 h-px bg-outline my-4;
+  }
+  
+  .md-divider-vertical {
+    @apply border-0 w-px bg-outline mx-4 h-full;
   }
 }
 
-/* Remove old neo-brutalist styles */
-.neo-button,
-.neo-card,
-.neo-input,
-.neo-sidebar,
-.neo-active {
-  @apply border-0 shadow-none;
+@layer utilities {
+  .bg-primary { @apply bg-[hsl(var(--md-primary))]; }
+  .bg-primary-variant { @apply bg-[hsl(var(--md-primary-variant))]; }
+  .bg-secondary { @apply bg-[hsl(var(--md-secondary))]; }
+  .bg-secondary-variant { @apply bg-[hsl(var(--md-secondary-variant))]; }
+  .bg-surface { @apply bg-[hsl(var(--md-surface))]; }
+  .bg-surface-variant { @apply bg-[hsl(var(--md-surface-variant))]; }
+  .bg-background { @apply bg-[hsl(var(--md-background))]; }
+  .bg-error { @apply bg-[hsl(var(--md-error))]; }
+  
+  .text-primary { @apply text-[hsl(var(--md-primary))]; }
+  .text-primary-variant { @apply text-[hsl(var(--md-primary-variant))]; }
+  .text-secondary { @apply text-[hsl(var(--md-secondary))]; }
+  .text-secondary-variant { @apply text-[hsl(var(--md-secondary-variant))]; }
+  .text-on-primary { @apply text-[hsl(var(--md-on-primary))]; }
+  .text-on-secondary { @apply text-[hsl(var(--md-on-secondary))]; }
+  .text-on-surface { @apply text-[hsl(var(--md-on-surface))]; }
+  .text-on-background { @apply text-[hsl(var(--md-on-background))]; }
+  .text-on-error { @apply text-[hsl(var(--md-on-error))]; }
+  .text-outline { @apply text-[hsl(var(--md-outline))]; }
+  .text-outline-variant { @apply text-[hsl(var(--md-outline-variant))]; }
+  
+  .border-outline { @apply border-[hsl(var(--md-outline))]; }
+  .border-outline-variant { @apply border-[hsl(var(--md-outline-variant))]; }
+  
+  .opacity-8 { opacity: 0.08; }
+  .opacity-12 { opacity: 0.12; }
 }

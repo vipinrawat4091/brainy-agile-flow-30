@@ -1,21 +1,30 @@
 
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "notion-card",
-      className
-    )}
-    {...props}
-  />
-))
+  React.HTMLAttributes<HTMLDivElement> & {
+    elevation?: 0 | 1 | 2 | 3 | 4 | 5;
+    hoverable?: boolean;
+  }
+>(({ className, elevation = 1, hoverable = true, ...props }, ref) => {
+  const elevationClass = `md-elevation-${elevation}`
+  const hoverClass = hoverable ? `hover:md-elevation-${Math.min(elevation + 1, 5)} hover:-translate-y-0.5` : ''
+  
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "md-card",
+        elevationClass,
+        hoverClass,
+        className
+      )}
+      {...props}
+    />
+  )
+})
 Card.displayName = "Card"
 
 const CardHeader = React.forwardRef<
@@ -24,7 +33,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    className={cn("flex flex-col space-y-2 p-6 pb-4", className)}
     {...props}
   />
 ))
@@ -36,10 +45,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn(
-      "notion-heading-2 mb-0",
-      className
-    )}
+    className={cn("md-title-large text-on-surface", className)}
     {...props}
   />
 ))
@@ -51,7 +57,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("notion-muted", className)}
+    className={cn("md-body-medium text-outline", className)}
     {...props}
   />
 ))
@@ -71,7 +77,7 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
+    className={cn("flex items-center p-6 pt-4", className)}
     {...props}
   />
 ))

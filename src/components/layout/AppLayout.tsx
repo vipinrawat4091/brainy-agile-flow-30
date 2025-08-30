@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { 
@@ -22,7 +21,9 @@ import {
   UserCheck,
   Search,
   Bell,
-  Settings
+  Settings,
+  Menu,
+  Plus
 } from "lucide-react";
 import {
   Sidebar,
@@ -227,6 +228,7 @@ interface AppLayoutProps {
 export default function AppLayout({ children, currentPageName }: AppLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // Check user type from localStorage
   const userType = localStorage.getItem('user_type');
@@ -253,51 +255,68 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
 
   // If on login pages, don't show sidebar
   if (currentPageName === 'TeamLogin') {
-    return <div className="min-h-screen">{children}</div>;
+    return <div className="min-h-screen bg-background">{children}</div>;
   }
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
-        <Sidebar className="notion-sidebar w-64">
-          <SidebarHeader className="p-4 border-b border-sidebar-border">
+      <div className="min-h-screen flex w-full bg-md-background">
+        <Sidebar className={cn(
+          "md-nav-drawer border-r-0",
+          sidebarOpen ? "w-64" : "w-16"
+        )}>
+          <SidebarHeader className="p-4 border-b border-md-outline-variant">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-notion-blue flex items-center justify-center">
-                {isClient ? <Eye className="w-4 h-4 text-white" /> : <Brain className="w-4 h-4 text-white" />}
-              </div>
-              <div>
-                <h2 className="text-sm font-semibold text-sidebar-foreground">
-                  {portalTitle}
-                </h2>
-                <p className="text-xs text-sidebar-foreground/60">
-                  {isClient ? 'Project View' : isTeamMember ? 'Workspace' : 'Orchestration'}
-                </p>
-              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="w-8 h-8"
+              >
+                <Menu className="w-4 h-4" />
+              </Button>
+              {sidebarOpen && (
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                    {isClient ? <Eye className="w-4 h-4 text-on-primary" /> : <Brain className="w-4 h-4 text-on-primary" />}
+                  </div>
+                  <div>
+                    <h2 className="md-title-medium text-on-surface">
+                      {portalTitle}
+                    </h2>
+                    <p className="md-body-small text-outline">
+                      {isClient ? 'Project View' : isTeamMember ? 'Workspace' : 'Orchestration'}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </SidebarHeader>
           
           <SidebarContent className="p-2">
             <SidebarGroup>
-              <SidebarGroupLabel className="text-xs font-medium text-sidebar-foreground/60 px-3 py-2">
-                Navigation
-              </SidebarGroupLabel>
+              {sidebarOpen && (
+                <SidebarGroupLabel className="md-label-medium text-outline px-3 py-2">
+                  Navigation
+                </SidebarGroupLabel>
+              )}
               <SidebarGroupContent>
                 <SidebarMenu className="space-y-1">
                   {navItems.map((item) => {
                     const isActive = location.pathname === item.url;
                     return (
                       <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton 
-                          asChild 
-                          className={`w-full justify-start px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                            isActive 
-                              ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
-                              : 'text-sidebar-foreground hover:bg-sidebar-accent/50'
-                          }`}
-                        >
-                          <Link to={item.url} className="flex items-center gap-3">
-                            <item.icon className="w-4 h-4 flex-shrink-0" />
-                            <span className="truncate">{item.title}</span>
+                        <SidebarMenuButton asChild>
+                          <Link 
+                            to={item.url} 
+                            className={cn(
+                              "md-nav-item w-full justify-start",
+                              isActive && "active",
+                              !sidebarOpen && "justify-center px-2"
+                            )}
+                          >
+                            <item.icon className="w-5 h-5 flex-shrink-0" />
+                            {sidebarOpen && <span className="md-body-medium">{item.title}</span>}
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
@@ -308,25 +327,30 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
             </SidebarGroup>
           </SidebarContent>
           
-          <SidebarFooter className="p-4 border-t border-sidebar-border">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-sidebar-accent/50">
+          <SidebarFooter className="p-4 border-t border-md-outline-variant">
+            <div className={cn(
+              "flex items-center gap-3 p-3 rounded-2xl bg-md-surface-variant",
+              !sidebarOpen && "justify-center"
+            )}>
               {isClient ? <Eye className="w-4 h-4" /> : <Brain className="w-4 h-4" />}
-              <div className="flex-1 min-w-0">
-                <div className="text-xs font-medium text-sidebar-foreground truncate">
-                  {isClient ? 'Client View' : isTeamMember ? 'Team Member' : 'Manager'}
+              {sidebarOpen && (
+                <div className="flex-1 min-w-0">
+                  <div className="md-label-large text-on-surface">
+                    {isClient ? 'Client View' : isTeamMember ? 'Team Member' : 'Manager'}
+                  </div>
+                  <div className="md-body-small text-outline">
+                    AI Powered
+                  </div>
                 </div>
-                <div className="text-xs text-sidebar-foreground/60">
-                  AI Powered
-                </div>
-              </div>
+              )}
             </div>
             
-            {isClient && (
+            {isClient && sidebarOpen && (
               <Button 
                 onClick={handleLogout}
                 variant="ghost" 
                 size="sm"
-                className="w-full justify-start gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+                className="w-full justify-start gap-2 text-error hover:bg-error/8"
               >
                 <LogOut className="w-4 h-4" />
                 Logout
@@ -336,38 +360,47 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
         </Sidebar>
 
         <main className="flex-1 flex flex-col min-w-0">
-          {/* Top Navigation */}
-          <header className="notion-page-header h-16 flex-shrink-0">
+          {/* Top App Bar */}
+          <header className="h-16 flex items-center justify-between px-6 bg-md-surface border-b border-md-outline-variant md-elevation-1">
             <div className="flex items-center gap-4">
-              <h1 className="text-lg font-semibold text-foreground">
+              <h1 className="md-headline-small text-on-surface">
                 {currentPageName || 'Dashboard'}
               </h1>
             </div>
             
             <div className="flex items-center gap-3">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-outline" />
                 <Input 
                   placeholder="Search..." 
-                  className="pl-10 w-64 h-9 bg-background border-border"
+                  className="md-input pl-10 w-64 h-10"
                 />
               </div>
               
-              <Button variant="ghost" size="sm" className="w-9 h-9 p-0">
-                <Bell className="w-4 h-4" />
+              <Button variant="ghost" size="icon" className="w-10 h-10">
+                <Bell className="w-5 h-5" />
               </Button>
               
-              <Button variant="ghost" size="sm" className="w-9 h-9 p-0">
-                <Settings className="w-4 h-4" />
+              <Button variant="ghost" size="icon" className="w-10 h-10">
+                <Settings className="w-5 h-5" />
               </Button>
             </div>
           </header>
 
           {/* Content Area */}
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 overflow-auto bg-md-background">
             {children}
           </div>
         </main>
+
+        {/* Floating Action Button */}
+        <Button 
+          variant="fab"
+          className="md-fab animate-fab-in"
+          aria-label="Add new item"
+        >
+          <Plus className="w-6 h-6" />
+        </Button>
       </div>
     </SidebarProvider>
   );
