@@ -50,6 +50,10 @@
     --md-on-error: 0 0% 100%;
     --md-outline: 0 0% 74%;
     --md-outline-variant: 0 0% 84%;
+
+    /* Material Design with opacity variants */
+    --md-primary-12: 219 100% 56% / 0.12;
+    --md-primary-8: 219 100% 56% / 0.08;
   }
 
   .dark {
@@ -96,6 +100,9 @@
     --md-on-error: 0 0% 0%;
     --md-outline: 0 0% 64%;
     --md-outline-variant: 0 0% 45%;
+
+    --md-primary-12: 219 100% 66% / 0.12;
+    --md-primary-8: 219 100% 66% / 0.08;
   }
 }
 
@@ -106,8 +113,8 @@
   
   body {
     @apply bg-background text-foreground;
-    font-family: 'Roboto', 'Google Sans', 'Segoe UI', system-ui, sans-serif;
-    font-size: 14px;
+    font-family: 'Google Sans', 'Roboto', 'Inter', system-ui, sans-serif;
+    font-size: 15px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -148,12 +155,12 @@
 
   /* Material Design Cards */
   .md-card {
-    @apply bg-card border-0 rounded-xl md-elevation-1 transition-all duration-200;
+    @apply bg-md-surface border-0 rounded-2xl md-elevation-1 transition-all duration-200;
   }
   
   .md-card:hover {
-    @apply md-elevation-2;
-    transform: translateY(-1px);
+    @apply md-elevation-3;
+    transform: translateY(-2px);
   }
   
   .md-card-elevated {
@@ -161,22 +168,23 @@
   }
   
   .md-card-elevated:hover {
-    @apply md-elevation-3;
-    transform: translateY(-2px);
+    @apply md-elevation-4;
+    transform: translateY(-4px);
   }
 
   /* Material Design Buttons */
   .md-button {
-    @apply inline-flex items-center justify-center rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden;
+    @apply inline-flex items-center justify-center rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-md-primary disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden;
   }
   
   .md-button::before {
     content: '';
-    @apply absolute inset-0 bg-current opacity-0 transition-opacity duration-200 rounded-full;
+    @apply absolute inset-0 bg-current transition-opacity duration-200 rounded-full;
+    opacity: 0;
   }
   
   .md-button:hover::before {
-    @apply opacity-8;
+    opacity: 0.08;
   }
   
   .md-button:active {
@@ -184,32 +192,33 @@
   }
   
   .md-button-filled {
-    @apply md-button bg-primary text-primary-foreground h-10 px-6 md-elevation-1;
+    @apply md-button bg-md-primary text-md-on-primary h-10 px-6 md-elevation-2;
   }
   
   .md-button-filled:hover {
-    @apply md-elevation-2;
+    @apply md-elevation-4;
   }
   
   .md-button-outlined {
-    @apply md-button border border-outline bg-transparent text-primary h-10 px-6;
+    @apply md-button border border-md-outline bg-transparent text-md-primary h-10 px-6;
   }
   
   .md-button-text {
-    @apply md-button bg-transparent text-primary h-10 px-4;
+    @apply md-button bg-transparent text-md-primary h-10 px-4;
   }
   
   .md-button-fab {
-    @apply md-button bg-primary text-primary-foreground w-14 h-14 rounded-full md-elevation-2;
+    @apply md-button bg-md-primary text-md-on-primary w-14 h-14 rounded-full md-elevation-3;
   }
   
   .md-button-fab:hover {
-    @apply md-elevation-3;
+    @apply md-elevation-5;
   }
 
   /* Material Design Input Fields */
   .md-input {
-    @apply w-full rounded-lg border border-outline bg-surface px-4 py-3 text-sm transition-all duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+    @apply w-full rounded-lg border border-md-outline bg-md-surface px-4 py-3 text-sm transition-all duration-200 focus:border-md-primary focus:outline-none focus:ring-2;
+    focus:ring-color: hsl(var(--md-primary) / 0.2);
   }
   
   .md-input-outlined {
@@ -217,16 +226,16 @@
   }
   
   .md-input-filled {
-    @apply md-input bg-surface-variant border-0 border-b-2 border-outline rounded-b-none rounded-t-lg focus:border-primary;
+    @apply md-input bg-md-surface-variant border-0 border-b-2 border-md-outline rounded-b-none rounded-t-lg focus:border-md-primary;
   }
 
   /* Material Design Navigation */
   .md-nav-rail {
-    @apply bg-surface border-r border-outline md-elevation-0 transition-all duration-300;
+    @apply bg-md-surface border-r border-md-outline md-elevation-0 transition-all duration-300;
   }
   
   .md-nav-drawer {
-    @apply bg-surface md-elevation-1 transition-all duration-300;
+    @apply bg-md-surface md-elevation-2 transition-all duration-300;
   }
   
   .md-nav-item {
@@ -235,56 +244,58 @@
   
   .md-nav-item::before {
     content: '';
-    @apply absolute inset-0 bg-primary opacity-0 transition-all duration-200 rounded-full;
+    @apply absolute inset-0 bg-md-primary transition-all duration-200 rounded-full;
+    opacity: 0;
   }
   
   .md-nav-item:hover::before {
-    @apply opacity-8;
+    opacity: 0.08;
   }
   
   .md-nav-item.active {
-    @apply bg-primary/12 text-primary;
+    background-color: hsl(var(--md-primary-12));
+    @apply text-md-primary;
   }
   
   .md-nav-item.active::before {
-    @apply opacity-12;
+    opacity: 0.12;
   }
 
   /* Material Design Typography */
   .md-headline-large {
-    @apply text-3xl font-normal tracking-tight;
+    @apply text-4xl font-normal tracking-tight;
   }
   
   .md-headline-medium {
-    @apply text-2xl font-normal tracking-tight;
+    @apply text-3xl font-normal tracking-tight;
   }
   
   .md-headline-small {
-    @apply text-xl font-normal tracking-tight;
+    @apply text-2xl font-normal tracking-tight;
   }
   
   .md-title-large {
-    @apply text-lg font-medium;
+    @apply text-xl font-medium;
   }
   
   .md-title-medium {
-    @apply text-base font-medium;
+    @apply text-lg font-medium;
   }
   
   .md-title-small {
-    @apply text-sm font-medium;
+    @apply text-base font-medium;
   }
   
   .md-body-large {
-    @apply text-base;
+    @apply text-base leading-relaxed;
   }
   
   .md-body-medium {
-    @apply text-sm;
+    @apply text-sm leading-relaxed;
   }
   
   .md-body-small {
-    @apply text-xs;
+    @apply text-xs leading-relaxed;
   }
   
   .md-label-large {
@@ -301,116 +312,100 @@
 
   /* Material Design Surfaces */
   .md-surface {
-    @apply bg-surface text-on-surface;
+    @apply bg-md-surface text-md-on-surface;
   }
   
   .md-surface-variant {
-    @apply bg-surface-variant text-on-surface;
+    @apply bg-md-surface-variant text-md-on-surface;
   }
   
   .md-surface-container {
-    @apply bg-surface md-elevation-1 rounded-xl;
+    @apply bg-md-surface md-elevation-1 rounded-2xl;
   }
   
   .md-surface-container-low {
-    @apply bg-surface md-elevation-0 rounded-xl;
+    @apply bg-md-surface md-elevation-0 rounded-2xl;
   }
   
   .md-surface-container-high {
-    @apply bg-surface md-elevation-2 rounded-xl;
-  }
-
-  /* Ripple Effect */
-  @keyframes ripple {
-    0% {
-      transform: scale(0);
-      opacity: 0.5;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0;
-    }
-  }
-  
-  .ripple {
-    @apply absolute rounded-full bg-current pointer-events-none;
-    animation: ripple 600ms linear;
+    @apply bg-md-surface md-elevation-3 rounded-2xl;
   }
 
   /* Floating Action Button */
   .md-fab {
-    @apply fixed bottom-6 right-6 w-14 h-14 bg-primary text-primary-foreground rounded-full md-elevation-3 transition-all duration-200 flex items-center justify-center;
+    @apply fixed bottom-6 right-6 w-16 h-16 bg-md-primary text-md-on-primary rounded-full md-elevation-3 transition-all duration-200 flex items-center justify-center;
   }
   
   .md-fab:hover {
-    @apply md-elevation-4;
+    @apply md-elevation-5;
     transform: scale(1.05);
   }
 
   /* Material Design List */
   .md-list {
-    @apply bg-surface rounded-xl md-elevation-0;
+    @apply bg-md-surface rounded-2xl md-elevation-1;
   }
   
   .md-list-item {
-    @apply flex items-center gap-4 px-4 py-3 transition-colors duration-200 hover:bg-surface-variant border-b border-outline/20 last:border-b-0;
+    @apply flex items-center gap-4 px-6 py-4 transition-colors duration-200 hover:bg-md-surface-variant border-b border-md-outline last:border-b-0;
   }
   
   .md-list-item:first-child {
-    @apply rounded-t-xl;
+    @apply rounded-t-2xl;
   }
   
   .md-list-item:last-child {
-    @apply rounded-b-xl;
+    @apply rounded-b-2xl;
   }
 
   /* Material Design Chips */
   .md-chip {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border border-outline;
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border border-md-outline;
   }
   
   .md-chip-filled {
-    @apply md-chip bg-primary text-primary-foreground border-primary;
+    @apply md-chip bg-md-primary text-md-on-primary border-md-primary;
   }
   
   .md-chip-outlined {
-    @apply md-chip bg-transparent text-on-surface;
+    @apply md-chip bg-transparent text-md-on-surface;
   }
 
   /* Material Design Dividers */
   .md-divider {
-    @apply border-0 h-px bg-outline my-4;
+    @apply border-0 h-px bg-md-outline my-6;
   }
   
   .md-divider-vertical {
-    @apply border-0 w-px bg-outline mx-4 h-full;
+    @apply border-0 w-px bg-md-outline mx-6 h-full;
   }
 }
 
 @layer utilities {
-  .bg-primary { @apply bg-[hsl(var(--md-primary))]; }
-  .bg-primary-variant { @apply bg-[hsl(var(--md-primary-variant))]; }
-  .bg-secondary { @apply bg-[hsl(var(--md-secondary))]; }
-  .bg-secondary-variant { @apply bg-[hsl(var(--md-secondary-variant))]; }
-  .bg-surface { @apply bg-[hsl(var(--md-surface))]; }
-  .bg-surface-variant { @apply bg-[hsl(var(--md-surface-variant))]; }
-  .bg-background { @apply bg-[hsl(var(--md-background))]; }
-  .bg-error { @apply bg-[hsl(var(--md-error))]; }
+  .bg-md-primary { @apply bg-[hsl(var(--md-primary))]; }
+  .bg-md-primary-variant { @apply bg-[hsl(var(--md-primary-variant))]; }
+  .bg-md-secondary { @apply bg-[hsl(var(--md-secondary))]; }
+  .bg-md-secondary-variant { @apply bg-[hsl(var(--md-secondary-variant))]; }
+  .bg-md-surface { @apply bg-[hsl(var(--md-surface))]; }
+  .bg-md-surface-variant { @apply bg-[hsl(var(--md-surface-variant))]; }
+  .bg-md-background { @apply bg-[hsl(var(--md-background))]; }
+  .bg-md-error { @apply bg-[hsl(var(--md-error))]; }
   
-  .text-primary { @apply text-[hsl(var(--md-primary))]; }
-  .text-primary-variant { @apply text-[hsl(var(--md-primary-variant))]; }
-  .text-secondary { @apply text-[hsl(var(--md-secondary))]; }
-  .text-secondary-variant { @apply text-[hsl(var(--md-secondary-variant))]; }
-  .text-on-primary { @apply text-[hsl(var(--md-on-primary))]; }
-  .text-on-secondary { @apply text-[hsl(var(--md-on-secondary))]; }
-  .text-on-surface { @apply text-[hsl(var(--md-on-surface))]; }
-  .text-on-background { @apply text-[hsl(var(--md-on-background))]; }
-  .text-on-error { @apply text-[hsl(var(--md-on-error))]; }
-  .text-outline { @apply text-[hsl(var(--md-outline))]; }
-  .text-outline-variant { @apply text-[hsl(var(--md-outline-variant))]; }
+  .text-md-primary { @apply text-[hsl(var(--md-primary))]; }
+  .text-md-primary-variant { @apply text-[hsl(var(--md-primary-variant))]; }
+  .text-md-secondary { @apply text-[hsl(var(--md-secondary))]; }
+  .text-md-secondary-variant { @apply text-[hsl(var(--md-secondary-variant))]; }
+  .text-md-on-primary { @apply text-[hsl(var(--md-on-primary))]; }
+  .text-md-on-secondary { @apply text-[hsl(var(--md-on-secondary))]; }
+  .text-md-on-surface { @apply text-[hsl(var(--md-on-surface))]; }
+  .text-md-on-background { @apply text-[hsl(var(--md-on-background))]; }
+  .text-md-on-error { @apply text-[hsl(var(--md-on-error))]; }
+  .text-md-outline { @apply text-[hsl(var(--md-outline))]; }
+  .text-md-outline-variant { @apply text-[hsl(var(--md-outline-variant))]; }
   
-  .border-outline { @apply border-[hsl(var(--md-outline))]; }
-  .border-outline-variant { @apply border-[hsl(var(--md-outline-variant))]; }
+  .border-md-outline { @apply border-[hsl(var(--md-outline))]; }
+  .border-md-outline-variant { @apply border-[hsl(var(--md-outline-variant))]; }
+  .border-md-primary { @apply border-[hsl(var(--md-primary))]; }
   
   .opacity-8 { opacity: 0.08; }
   .opacity-12 { opacity: 0.12; }
