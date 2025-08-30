@@ -99,34 +99,34 @@
 
 @layer components {
   .neo-button {
-    @apply border-4 border-black font-bold transition-all duration-100;
-    box-shadow: 8px 8px 0px hsl(var(--neo-black));
+    @apply border-2 border-black font-semibold transition-all duration-100;
+    box-shadow: 3px 3px 0px hsl(var(--neo-black));
   }
   
   .neo-button:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 10px 10px 0px hsl(var(--neo-black));
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px hsl(var(--neo-black));
   }
   
   .neo-card {
-    @apply border-4 border-black;
-    box-shadow: 8px 8px 0px hsl(var(--neo-black));
-  }
-
-  .neo-input {
-    @apply border-2 border-black font-bold;
+    @apply border-2 border-black;
     box-shadow: 4px 4px 0px hsl(var(--neo-black));
   }
 
+  .neo-input {
+    @apply border border-black font-medium;
+    box-shadow: 2px 2px 0px hsl(var(--neo-black));
+  }
+
   .neo-sidebar {
-    @apply border-r-4 border-black;
+    @apply border-r-2 border-black;
     background: linear-gradient(135deg, hsl(var(--neo-light-gray)) 0%, #e9ecef 100%);
   }
 
   .neo-active {
-    @apply text-white border-2 border-black;
+    @apply text-white border border-black;
     background: hsl(var(--neo-blue));
-    box-shadow: 4px 4px 0px hsl(var(--neo-black));
+    box-shadow: 2px 2px 0px hsl(var(--neo-black));
     transform: translate(-1px, -1px);
   }
 
