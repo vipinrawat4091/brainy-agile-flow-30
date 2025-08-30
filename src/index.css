@@ -17,7 +17,7 @@
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
+    --accent: 210 40% 98%;
     --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -29,7 +29,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 3.9%;
     --sidebar-primary: 0 0% 9%;
@@ -39,17 +39,15 @@
     --sidebar-border: 0 0% 89.8%;
     --sidebar-ring: 0 0% 3.9%;
     
-    /* Neo Brutalism Colors */
-    --neo-blue: 210 100% 50%;
-    --neo-orange: 25 100% 50%;
-    --neo-green: 142 76% 36%;
-    --neo-pink: 327 100% 50%;
-    --neo-purple: 270 100% 50%;
-    --neo-cyan: 174 100% 50%;
-    --neo-black: 0 0% 0%;
-    --neo-white: 0 0% 100%;
-    --neo-gray: 0 0% 50%;
-    --neo-light-gray: 210 17% 95%;
+    /* Design System Colors */
+    --notion-gray-100: 0 0% 97%;
+    --notion-gray-200: 0 0% 95%;
+    --notion-gray-300: 0 0% 90%;
+    --notion-gray-400: 0 0% 70%;
+    --notion-gray-500: 0 0% 50%;
+    --notion-gray-600: 0 0% 30%;
+    --notion-blue: 210 100% 50%;
+    --notion-purple: 250 100% 60%;
   }
 
   .dark {
@@ -85,6 +83,13 @@
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 0 0% 14.9%;
     --sidebar-ring: 0 0% 83.1%;
+    
+    --notion-gray-100: 0 0% 7%;
+    --notion-gray-200: 0 0% 10%;
+    --notion-gray-300: 0 0% 15%;
+    --notion-gray-400: 0 0% 30%;
+    --notion-gray-500: 0 0% 50%;
+    --notion-gray-600: 0 0% 70%;
   }
 }
 
@@ -93,48 +98,97 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 15px;
+    line-height: 1.5;
   }
 }
 
 @layer components {
-  .neo-button {
-    @apply border-2 border-black font-semibold transition-all duration-100;
-    box-shadow: 3px 3px 0px hsl(var(--neo-black));
+  /* Design System Components */
+  .notion-card {
+    @apply bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200;
   }
   
-  .neo-button:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0px hsl(var(--neo-black));
+  .notion-button {
+    @apply inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
   }
   
-  .neo-card {
-    @apply border-2 border-black;
-    box-shadow: 4px 4px 0px hsl(var(--neo-black));
+  .notion-button-primary {
+    @apply notion-button bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2;
   }
+  
+  .notion-button-secondary {
+    @apply notion-button bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-4 py-2;
+  }
+  
+  .notion-button-ghost {
+    @apply notion-button hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2;
+  }
+  
+  .notion-input {
+    @apply flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .notion-sidebar {
+    @apply bg-sidebar border-r border-sidebar-border;
+  }
+  
+  .notion-page-header {
+    @apply flex items-center justify-between p-6 border-b border-border bg-background/50 backdrop-blur-sm;
+  }
+  
+  .notion-content {
+    @apply p-6 max-w-none;
+  }
+  
+  .notion-block {
+    @apply mb-4 last:mb-0;
+  }
+  
+  .notion-heading {
+    @apply font-semibold text-foreground mb-3;
+  }
+  
+  .notion-heading-1 {
+    @apply notion-heading text-2xl;
+  }
+  
+  .notion-heading-2 {
+    @apply notion-heading text-xl;
+  }
+  
+  .notion-heading-3 {
+    @apply notion-heading text-lg;
+  }
+  
+  .notion-text {
+    @apply text-foreground leading-relaxed;
+  }
+  
+  .notion-muted {
+    @apply text-muted-foreground text-sm;
+  }
+  
+  .chat-bubble {
+    @apply max-w-sm rounded-xl px-4 py-2 shadow-sm;
+  }
+  
+  .chat-bubble-sent {
+    @apply chat-bubble bg-primary text-primary-foreground ml-auto;
+  }
+  
+  .chat-bubble-received {
+    @apply chat-bubble bg-muted text-muted-foreground mr-auto;
+  }
+}
 
-  .neo-input {
-    @apply border border-black font-medium;
-    box-shadow: 2px 2px 0px hsl(var(--neo-black));
-  }
-
-  .neo-sidebar {
-    @apply border-r-2 border-black;
-    background: linear-gradient(135deg, hsl(var(--neo-light-gray)) 0%, #e9ecef 100%);
-  }
-
-  .neo-active {
-    @apply text-white border border-black;
-    background: hsl(var(--neo-blue));
-    box-shadow: 2px 2px 0px hsl(var(--neo-black));
-    transform: translate(-1px, -1px);
-  }
-
-  .ai-primary {
-    background: linear-gradient(135deg, hsl(var(--neo-blue)) 0%, hsl(var(--neo-purple)) 100%);
-  }
-
-  .quantum-boost {
-    background: linear-gradient(135deg, hsl(var(--neo-purple)) 0%, hsl(var(--neo-pink)) 100%);
-  }
+/* Remove old neo-brutalist styles */
+.neo-button,
+.neo-card,
+.neo-input,
+.neo-sidebar,
+.neo-active {
+  @apply border-0 shadow-none;
 }

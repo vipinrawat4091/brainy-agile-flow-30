@@ -4,7 +4,6 @@ import { Task, Sprint, Project, TeamMember } from "@/entities/all";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   CheckSquare,
@@ -15,8 +14,7 @@ import {
   ListTodo,
   AlertTriangle,
   Play,
-  Lightbulb,
-  Code
+  User
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AIAssistant from "../components/team/AIAssistant";
@@ -169,146 +167,131 @@ export default function MyTasks() {
   
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="notion-content flex items-center justify-center min-h-96">
         <div className="text-center">
-          <Brain className="w-16 h-16 text-blue-500 animate-pulse mx-auto" />
-          <p className="text-xl font-black text-gray-700 mt-4 uppercase">Loading Your Tasks...</p>
+          <Brain className="w-8 h-8 text-notion-blue animate-pulse mx-auto mb-4" />
+          <p className="text-lg font-medium text-foreground">Loading Your Tasks...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto h-full flex flex-col">
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
-          <div>
-            <h1 className="text-4xl font-black text-gray-900 uppercase tracking-tight">
-              MY TASKS
-            </h1>
-            <p className="text-lg font-bold text-gray-600 uppercase tracking-wide">
-              FOCUS ON YOUR OBJECTIVES
-            </p>
-            <p className="text-sm text-gray-500 font-bold mt-1">
-              Logged in as: {user.user_email}
-            </p>
+    <div className="notion-content">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
+        <div>
+          <h1 className="notion-heading-1">My Tasks</h1>
+          <p className="notion-muted">Focus on your objectives</p>
+          <div className="flex items-center gap-2 mt-2">
+            <User className="w-4 h-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">{user.user_email}</span>
           </div>
-          
-          {projects.length > 0 && (
-            <div className="w-64">
-              <Select value={selectedProject} onValueChange={setSelectedProject}>
-                <SelectTrigger className="neo-input font-bold border-4 border-black">
-                  <SelectValue placeholder="SELECT PROJECT" />
-                </SelectTrigger>
-                <SelectContent className="border-4 border-black bg-white">
-                  {projects.map((project) => (
-                    <SelectItem key={project.id} value={project.id}>
-                      {project.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+        </div>
+        
+        {projects.length > 0 && (
+          <div className="w-64">
+            <Select value={selectedProject} onValueChange={setSelectedProject}>
+              <SelectTrigger className="notion-input">
+                <SelectValue placeholder="Select Project" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover border border-border">
+                {projects.map((project) => (
+                  <SelectItem key={project.id} value={project.id}>
+                    {project.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* Task List */}
+        <div className="lg:col-span-1">
+          <Card className="h-fit">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <ListTodo className="w-5 h-5 text-notion-blue" />
+                Tasks ({tasks.length})
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 max-h-96 overflow-y-auto">
+              {tasks.length === 0 ? (
+                <div className="text-center py-8">
+                  <CheckSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-foreground mb-2">No Tasks Assigned</h3>
+                  <p className="text-muted-foreground">You have no tasks for this project</p>
+                </div>
+              ) : (
+                tasks.map((task, index) => (
+                  <motion.button
+                    key={task.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    onClick={() => setSelectedTask(task)}
+                    className={`w-full text-left p-4 rounded-lg border transition-all duration-200 ${
+                      selectedTask?.id === task.id 
+                        ? 'bg-accent border-notion-blue shadow-sm' 
+                        : 'border-border hover:bg-accent/50 hover:shadow-sm'
+                    }`}
+                  >
+                    <div className="space-y-3">
+                      <h4 className="font-medium text-sm text-foreground">{task.title}</h4>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <Badge variant={
+                          task.status === 'done' ? 'default' :
+                          task.status === 'in_progress' ? 'secondary' :
+                          task.status === 'review' ? 'outline' :
+                          'outline'
+                        } className="text-xs">
+                          {task.status?.replace('_', ' ') || 'Todo'}
+                        </Badge>
+                        {task.story_points && (
+                          <Badge variant="outline" className="text-xs">
+                            {task.story_points} pts
+                          </Badge>
+                        )}
+                        {task.priority && (
+                          <Badge variant={
+                            task.priority === 'critical' ? 'destructive' :
+                            task.priority === 'high' ? 'secondary' :
+                            'outline'
+                          } className="text-xs">
+                            {task.priority}
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  </motion.button>
+                ))
+              )}
+            </CardContent>
+          </Card>
         </div>
 
-        <div className="flex-grow grid lg:grid-cols-3 gap-6 min-h-0">
-          {/* Task List */}
-          <div className="lg:col-span-1 flex flex-col">
-            <Card className="neo-card bg-white border-4 border-black flex-grow flex flex-col">
-              <CardHeader className="border-b-4 border-black">
-                <CardTitle className="uppercase font-black text-xl flex items-center gap-3">
-                  <ListTodo className="w-6 h-6 text-blue-600" />
-                  TASK LIST ({tasks.length})
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 flex-grow overflow-y-auto">
-                <div className="space-y-3">
-                  {tasks.length === 0 ? (
-                    <div className="text-center py-8">
-                      <CheckSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                      <h3 className="text-lg font-black text-gray-500 uppercase mb-2">NO TASKS ASSIGNED</h3>
-                      <p className="text-gray-400 font-bold">You have no tasks for this project</p>
-                    </div>
-                  ) : (
-                    tasks.map((task, index) => (
-                      <motion.button
-                        key={task.id}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        onClick={() => setSelectedTask(task)}
-                        className={`w-full text-left p-4 border-4 border-black font-bold transition-all duration-200 ${
-                          selectedTask?.id === task.id 
-                            ? 'bg-blue-500 text-white shadow-[8px_8px_0px_#000] transform translate-x-[-4px] translate-y-[-4px]' 
-                            : 'bg-white hover:bg-gray-100 hover:shadow-[4px_4px_0px_#000] hover:transform hover:translate-x-[-2px] hover:translate-y-[-2px]'
-                        }`}
-                      >
-                        <div className="space-y-2">
-                          <h4 className="font-black uppercase text-sm">{task.title}</h4>
-                          <div className="flex items-center gap-2">
-                            <Badge className={`text-xs font-black border-2 border-black ${
-                              task.status === 'done' ? 'bg-green-500 text-white' :
-                              task.status === 'in_progress' ? 'bg-blue-500 text-white' :
-                              task.status === 'review' ? 'bg-orange-500 text-white' :
-                              'bg-gray-500 text-white'
-                            }`}>
-                              {task.status?.replace('_', ' ').toUpperCase() || 'TODO'}
-                            </Badge>
-                            {task.story_points && (
-                              <Badge variant="outline" className="text-xs font-black border-2 border-black">
-                                {task.story_points} PTS
-                              </Badge>
-                            )}
-                            {task.priority && (
-                              <Badge className={`text-xs font-black border-2 border-black ${
-                                task.priority === 'critical' ? 'bg-red-500 text-white' :
-                                task.priority === 'high' ? 'bg-orange-500 text-white' :
-                                task.priority === 'medium' ? 'bg-blue-500 text-white' :
-                                'bg-gray-500 text-white'
-                              }`}>
-                                {task.priority.toUpperCase()}
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-                      </motion.button>
-                    ))
-                  )}
-                </div>
-              </CardContent>
+        {/* Selected Task Details & AI Assistant */}
+        <div className="lg:col-span-2 space-y-6">
+          {selectedTask ? (
+            <>
+              <TaskCard task={selectedTask} onStatusChange={handleStatusUpdate} />
+              <AIAssistant task={selectedTask} />
+            </>
+          ) : (
+            <Card className="p-12 text-center">
+              <CheckSquare className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+              <h2 className="text-xl font-medium text-foreground mb-2">
+                {projects.length > 0 ? 'Select a Task' : 'No Projects'}
+              </h2>
+              <p className="text-muted-foreground">
+                {projects.length > 0 
+                  ? 'Choose a task from the list to view details' 
+                  : 'You are not assigned to any projects yet'
+                }
+              </p>
             </Card>
-          </div>
-
-          {/* Selected Task Details */}
-          <div className="lg:col-span-2 flex flex-col">
-            {selectedTask ? (
-              <div className="h-full flex flex-col gap-6">
-                <div className="flex-grow min-h-0">
-                  <TaskCard task={selectedTask} onStatusChange={handleStatusUpdate} />
-                </div>
-                <div className="flex-shrink-0">
-                  <AIAssistant task={selectedTask} />
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center h-full neo-card bg-white border-4 border-black">
-                <div className="text-center p-8">
-                  <CheckSquare className="w-24 h-24 text-gray-300 mx-auto mb-6" />
-                  <h2 className="text-2xl font-black text-gray-500 uppercase mb-2">
-                    {projects.length > 0 ? 'SELECT A TASK' : 'NO PROJECTS'}
-                  </h2>
-                  <p className="text-gray-400 font-bold">
-                    {projects.length > 0 
-                      ? 'Choose a task from the list to view details' 
-                      : 'You are not assigned to any projects yet'
-                    }
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
     </div>

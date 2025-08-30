@@ -19,7 +19,10 @@ import {
   FlaskConical,
   Eye,
   LogOut,
-  UserCheck
+  UserCheck,
+  Search,
+  Bell,
+  Settings
 } from "lucide-react";
 import {
   Sidebar,
@@ -35,97 +38,83 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const navigationItems = [
   {
     title: "Dashboard",
     url: createPageUrl("Dashboard"),
     icon: LayoutGrid,
-    color: "text-blue-600"
   },
   {
     title: "Projects",
     url: createPageUrl("Projects"),
     icon: FolderOpen,
-    color: "text-indigo-600"
   },
   {
     title: "Create Project",
     url: createPageUrl("CreateProject"),
     icon: Zap,
-    color: "text-orange-600"
   },
   {
     title: "Features",
     url: createPageUrl("Features"),
     icon: CheckSquare,
-    color: "text-purple-600"
   },
   {
     title: "Sprint Board",
     url: createPageUrl("SprintBoard"),
     icon: Target,
-    color: "text-green-600"
   },
   {
     title: "Team",
     url: createPageUrl("Team"),
     icon: Users,
-    color: "text-purple-600"
   },
   {
     title: "Meetings",
     url: createPageUrl("MeetingDashboard"),
     icon: Calendar,
-    color: "text-violet-600"
   },
   {
     title: "Messages",
     url: "/client-messages",
     icon: MessageSquare,
-    color: "text-orange-600"
   },
   {
     title: "Clients",
     url: createPageUrl("ClientManagement"),
     icon: UserCheck,
-    color: "text-emerald-600"
   },
   {
     title: "Client Tickets",
     url: createPageUrl("ClientTickets"),
     icon: FileText,
-    color: "text-red-600"
   },
   {
     title: "Progress",
     url: createPageUrl("Progress"),
     icon: TrendingUp,
-    color: "text-pink-600"
   },
   {
     title: "Analytics",
     url: createPageUrl("Analytics"),
     icon: BarChart3,
-    color: "text-cyan-600"
   },
   {
     title: "Workspace",
     url: createPageUrl("Workspace"),
     icon: FileText,
-    color: "text-amber-600"
   },
   {
     title: "Test Center",
     url: createPageUrl("TestCenter"),
     icon: FlaskConical,
-    color: "text-red-600"
   },
   {
     title: "Team Logs",
     url: createPageUrl("TeamLogs"),
     icon: FileText,
-    color: "text-slate-600"
   }
 ];
 
@@ -134,73 +123,61 @@ const teamNavigationItems = [
     title: "Dashboard",
     url: createPageUrl("TeamDashboard"),
     icon: LayoutGrid,
-    color: "text-blue-600"
   },
   {
     title: "My Tasks",
     url: createPageUrl("MyTasks"),
     icon: CheckSquare,
-    color: "text-green-600"
   },
   {
     title: "Features",
     url: createPageUrl("Features"),
     icon: CheckSquare,
-    color: "text-purple-600"
   },
   {
     title: "Sprint Board",
     url: createPageUrl("TeamSprintBoard"),
     icon: Target,
-    color: "text-purple-600"
   },
   {
     title: "Meetings",
     url: createPageUrl("MeetingDashboard"),
     icon: Calendar,
-    color: "text-violet-600"
   },
   {
     title: "Messages",
     url: "/client-messages",
     icon: MessageSquare,
-    color: "text-blue-600"
   },
   {
     title: "AI Assistant",
     url: createPageUrl("AITaskHelper"),
     icon: Brain,
-    color: "text-pink-600"
   },
   {
     title: "Collaboration",
     url: createPageUrl("TeamCollaboration"),
     icon: MessageSquare,
-    color: "text-orange-600"
   },
   {
     title: "My Progress",
     url: createPageUrl("MyProgress"),
     icon: TrendingUp,
-    color: "text-cyan-600"
   },
   {
     title: "Calendar",
     url: createPageUrl("MyCalendar"),
     icon: Calendar,
-    color: "text-indigo-600"
   },
   {
     title: "Knowledge Base",
     url: createPageUrl("KnowledgeBase"),
     icon: BookOpen,
-    color: "text-amber-600"
   },
   {
     title: "Test Center",
     url: createPageUrl("TestCenter"),
     icon: FlaskConical,
-    color: "text-red-600"
   }
 ];
 
@@ -209,43 +186,36 @@ const clientNavigationItems = [
     title: "Dashboard",
     url: "/client-dashboard",
     icon: LayoutGrid,
-    color: "text-blue-600"
   },
   {
     title: "Meetings",
     url: createPageUrl("MeetingDashboard"),
     icon: Calendar,
-    color: "text-purple-600"
   },
   {
     title: "Project Progress",
     url: "/client-progress",
     icon: TrendingUp,
-    color: "text-green-600"
   },
   {
     title: "Features",
     url: "/client-features",
     icon: CheckSquare,
-    color: "text-purple-600"
   },
   {
     title: "Messages",
     url: "/client-messages",
     icon: MessageSquare,
-    color: "text-orange-600"
   },
   {
     title: "Documents",
     url: "/client-documents",
     icon: FileText,
-    color: "text-cyan-600"
   },
   {
     title: "Support",
     url: "/client-support",
     icon: Users,
-    color: "text-pink-600"
   }
 ];
 
@@ -266,20 +236,14 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
   const isClient = userType === 'client';
   
   let navItems = navigationItems; // Default to manager navigation
-  let portalTitle = 'PROJECT AI';
-  let portalSubtitle = 'ORCHESTRATION';
-  let sectionLabel = 'NAVIGATION';
+  let portalTitle = 'Project AI';
   
   if (isTeamMember) {
     navItems = teamNavigationItems;
-    portalTitle = 'TEAM PORTAL';
-    portalSubtitle = 'WORKSPACE';
-    sectionLabel = 'MY WORKSPACE';
+    portalTitle = 'Team Portal';
   } else if (isClient) {
     navItems = clientNavigationItems;
-    portalTitle = 'CLIENT PORTAL';
-    portalSubtitle = 'PROJECT VIEW';
-    sectionLabel = 'MY PROJECT';
+    portalTitle = 'Client Portal';
   }
 
   const handleLogout = () => {
@@ -294,68 +258,19 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
 
   return (
     <SidebarProvider>
-      <style>{`
-        :root {
-          --neo-blue: #0066FF;
-          --neo-orange: #FF6600;
-          --neo-green: #00CC44;
-          --neo-pink: #FF0099;
-          --neo-purple: #7700FF;
-          --neo-cyan: #00FFCC;
-          --neo-black: #000000;
-          --neo-white: #FFFFFF;
-        }
-        
-        .neo-button {
-          border: 2px solid var(--neo-black) !important;
-          box-shadow: 3px 3px 0px var(--neo-black) !important;
-          transition: all 0.1s ease !important;
-        }
-        
-        .neo-button:hover {
-          transform: translate(-1px, -1px) !important;
-          box-shadow: 4px 4px 0px var(--neo-black) !important;
-        }
-        
-        .neo-card {
-          border: 2px solid var(--neo-black) !important;
-          box-shadow: 3px 3px 0px var(--neo-black) !important;
-        }
-        
-        .neo-input {
-          border: 2px solid var(--neo-black) !important;
-          box-shadow: 2px 2px 0px var(--neo-black) !important;
-        }
-        
-        .neo-sidebar {
-          border-right: 2px solid var(--neo-black) !important;
-          background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
-        }
-        
-        .neo-active {
-          background: var(--neo-blue) !important;
-          color: white !important;
-          border: 2px solid var(--neo-black) !important;
-          box-shadow: 2px 2px 0px var(--neo-black) !important;
-          transform: translate(-1px, -1px) !important;
-        }
-      `}</style>
-      
-      <div className="min-h-screen flex w-full bg-gray-50">
-        <Sidebar className="neo-sidebar w-48">
-          <SidebarHeader className="border-b-2 border-black p-3">
-            <div className="flex items-center gap-2">
-              <div className={`w-8 h-8 neo-card rounded-none flex items-center justify-center ${
-                isClient ? 'bg-gradient-to-br from-green-500 to-blue-600' : 'bg-gradient-to-br from-blue-500 to-purple-600'
-              }`}>
+      <div className="min-h-screen flex w-full bg-background">
+        <Sidebar className="notion-sidebar w-64">
+          <SidebarHeader className="p-4 border-b border-sidebar-border">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-notion-blue flex items-center justify-center">
                 {isClient ? <Eye className="w-4 h-4 text-white" /> : <Brain className="w-4 h-4 text-white" />}
               </div>
               <div>
-                <h2 className="text-sm font-black text-gray-900 uppercase tracking-tight">
+                <h2 className="text-sm font-semibold text-sidebar-foreground">
                   {portalTitle}
                 </h2>
-                <p className="text-xs font-bold text-gray-600 uppercase tracking-wider">
-                  {portalSubtitle}
+                <p className="text-xs text-sidebar-foreground/60">
+                  {isClient ? 'Project View' : isTeamMember ? 'Workspace' : 'Orchestration'}
                 </p>
               </div>
             </div>
@@ -363,10 +278,10 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
           
           <SidebarContent className="p-2">
             <SidebarGroup>
-              <SidebarGroupLabel className="text-xs font-black text-gray-900 uppercase tracking-widest px-2 py-2 border-b border-gray-300">
-                {sectionLabel}
+              <SidebarGroupLabel className="text-xs font-medium text-sidebar-foreground/60 px-3 py-2">
+                Navigation
               </SidebarGroupLabel>
-              <SidebarGroupContent className="mt-2">
+              <SidebarGroupContent>
                 <SidebarMenu className="space-y-1">
                   {navItems.map((item) => {
                     const isActive = location.pathname === item.url;
@@ -374,70 +289,82 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
                       <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton 
                           asChild 
-                          className={`rounded-none font-bold uppercase tracking-wide transition-all duration-100 text-xs ${
+                          className={`w-full justify-start px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                             isActive 
-                              ? 'neo-active text-white' 
-                              : 'hover:bg-white hover:border hover:border-black hover:shadow-[2px_2px_0px_#000] hover:transform hover:translate-x-[-1px] hover:translate-y-[-1px]'
+                              ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                              : 'text-sidebar-foreground hover:bg-sidebar-accent/50'
                           }`}
                         >
-                          <Link to={item.url} className="flex items-center gap-2 p-2">
-                            <item.icon className={`w-4 h-4 ${isActive ? 'text-white' : item.color}`} />
-                            <span className="text-xs">{item.title}</span>
+                          <Link to={item.url} className="flex items-center gap-3">
+                            <item.icon className="w-4 h-4 flex-shrink-0" />
+                            <span className="truncate">{item.title}</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     );
                   })}
-                  
-                  {/* Logout button for clients */}
-                  {isClient && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton 
-                        className="rounded-none font-bold uppercase tracking-wide transition-all duration-100 hover:bg-red-100 hover:border hover:border-black hover:shadow-[2px_2px_0px_#000] hover:transform hover:translate-x-[-1px] hover:translate-y-[-1px] text-xs"
-                        onClick={handleLogout}
-                      >
-                        <div className="flex items-center gap-2 p-2">
-                          <LogOut className="w-4 h-4 text-red-600" />
-                          <span className="text-xs text-red-600">Logout</span>
-                        </div>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
           
-          <SidebarFooter className="p-2 border-t-2 border-black">
-            <div className={`flex items-center gap-2 p-2 neo-card text-white ${
-              isClient ? 'bg-gradient-to-r from-green-500 to-blue-500' : 'bg-gradient-to-r from-purple-500 to-pink-500'
-            }`}>
+          <SidebarFooter className="p-4 border-t border-sidebar-border">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-sidebar-accent/50">
               {isClient ? <Eye className="w-4 h-4" /> : <Brain className="w-4 h-4" />}
-              <div>
-                <div className="text-xs font-black uppercase">
-                  {isClient ? 'CLIENT VIEW' : 'AI POWERED'}
+              <div className="flex-1 min-w-0">
+                <div className="text-xs font-medium text-sidebar-foreground truncate">
+                  {isClient ? 'Client View' : isTeamMember ? 'Team Member' : 'Manager'}
                 </div>
-                <div className="text-xs font-bold opacity-80">
-                  {isClient ? 'Project Portal' : isTeamMember ? 'Smart Workspace' : 'Next-Gen PM'}
+                <div className="text-xs text-sidebar-foreground/60">
+                  AI Powered
                 </div>
               </div>
             </div>
             
-            {!isTeamMember && !isClient && (
-              <div className="mt-2">
-                <Link 
-                  to={createPageUrl("TeamLogin")}
-                  className="block w-full p-1 text-center bg-gray-200 hover:bg-gray-300 border border-black font-bold uppercase text-xs transition-colors"
-                >
-                  TEAM LOGIN
-                </Link>
-              </div>
+            {isClient && (
+              <Button 
+                onClick={handleLogout}
+                variant="ghost" 
+                size="sm"
+                className="w-full justify-start gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </Button>
             )}
           </SidebarFooter>
         </Sidebar>
 
-        <main className="flex-1 overflow-hidden">
-          <div className="h-full">
+        <main className="flex-1 flex flex-col min-w-0">
+          {/* Top Navigation */}
+          <header className="notion-page-header h-16 flex-shrink-0">
+            <div className="flex items-center gap-4">
+              <h1 className="text-lg font-semibold text-foreground">
+                {currentPageName || 'Dashboard'}
+              </h1>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input 
+                  placeholder="Search..." 
+                  className="pl-10 w-64 h-9 bg-background border-border"
+                />
+              </div>
+              
+              <Button variant="ghost" size="sm" className="w-9 h-9 p-0">
+                <Bell className="w-4 h-4" />
+              </Button>
+              
+              <Button variant="ghost" size="sm" className="w-9 h-9 p-0">
+                <Settings className="w-4 h-4" />
+              </Button>
+            </div>
+          </header>
+
+          {/* Content Area */}
+          <div className="flex-1 overflow-auto">
             {children}
           </div>
         </main>
