@@ -1,4 +1,5 @@
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -52,8 +53,8 @@
     --md-outline-variant: 0 0% 84%;
 
     /* Material Design with opacity variants */
-    --md-primary-12: 219 100% 56% / 0.12;
-    --md-primary-8: 219 100% 56% / 0.08;
+    --md-primary-12: 219 100% 56%;
+    --md-primary-8: 219 100% 56%;
   }
 
   .dark {
@@ -101,8 +102,8 @@
     --md-outline: 0 0% 64%;
     --md-outline-variant: 0 0% 45%;
 
-    --md-primary-12: 219 100% 66% / 0.12;
-    --md-primary-8: 219 100% 66% / 0.08;
+    --md-primary-12: 219 100% 66%;
+    --md-primary-8: 219 100% 66%;
   }
 }
 
@@ -253,7 +254,7 @@
   }
   
   .md-nav-item.active {
-    background-color: hsl(var(--md-primary-12));
+    background-color: hsl(var(--md-primary-12) / 0.12);
     @apply text-md-primary;
   }
   
@@ -410,3 +411,4 @@
   .opacity-8 { opacity: 0.08; }
   .opacity-12 { opacity: 0.12; }
 }
+
