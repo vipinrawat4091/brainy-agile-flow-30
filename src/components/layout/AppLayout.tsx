@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import { cn } from "@/lib/utils";
 import { 
   Zap, 
   LayoutGrid, 
@@ -230,14 +231,12 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  // Check user type from localStorage
   const userType = localStorage.getItem('user_type');
   
-  // Determine which navigation items to show
   const isTeamMember = userType === 'team_member';
   const isClient = userType === 'client';
   
-  let navItems = navigationItems; // Default to manager navigation
+  let navItems = navigationItems;
   let portalTitle = 'Project AI';
   
   if (isTeamMember) {
@@ -253,7 +252,6 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
     navigate('/');
   };
 
-  // If on login pages, don't show sidebar
   if (currentPageName === 'TeamLogin') {
     return <div className="min-h-screen bg-background">{children}</div>;
   }
