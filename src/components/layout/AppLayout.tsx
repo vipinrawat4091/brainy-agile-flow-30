@@ -307,51 +307,51 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
         }
         
         .neo-button {
-          border: 4px solid var(--neo-black) !important;
-          box-shadow: 8px 8px 0px var(--neo-black) !important;
+          border: 2px solid var(--neo-black) !important;
+          box-shadow: 3px 3px 0px var(--neo-black) !important;
           transition: all 0.1s ease !important;
         }
         
         .neo-button:hover {
-          transform: translate(-2px, -2px) !important;
-          box-shadow: 10px 10px 0px var(--neo-black) !important;
-        }
-        
-        .neo-card {
-          border: 4px solid var(--neo-black) !important;
-          box-shadow: 8px 8px 0px var(--neo-black) !important;
-        }
-        
-        .neo-input {
-          border: 3px solid var(--neo-black) !important;
+          transform: translate(-1px, -1px) !important;
           box-shadow: 4px 4px 0px var(--neo-black) !important;
         }
         
+        .neo-card {
+          border: 2px solid var(--neo-black) !important;
+          box-shadow: 3px 3px 0px var(--neo-black) !important;
+        }
+        
+        .neo-input {
+          border: 2px solid var(--neo-black) !important;
+          box-shadow: 2px 2px 0px var(--neo-black) !important;
+        }
+        
         .neo-sidebar {
-          border-right: 4px solid var(--neo-black) !important;
+          border-right: 2px solid var(--neo-black) !important;
           background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
         }
         
         .neo-active {
           background: var(--neo-blue) !important;
           color: white !important;
-          border: 3px solid var(--neo-black) !important;
-          box-shadow: 4px 4px 0px var(--neo-black) !important;
+          border: 2px solid var(--neo-black) !important;
+          box-shadow: 2px 2px 0px var(--neo-black) !important;
           transform: translate(-1px, -1px) !important;
         }
       `}</style>
       
       <div className="min-h-screen flex w-full bg-gray-50">
-        <Sidebar className="neo-sidebar">
-          <SidebarHeader className="border-b-4 border-black p-6">
-            <div className="flex items-center gap-3">
-              <div className={`w-12 h-12 neo-card rounded-none flex items-center justify-center ${
+        <Sidebar className="neo-sidebar w-48">
+          <SidebarHeader className="border-b-2 border-black p-3">
+            <div className="flex items-center gap-2">
+              <div className={`w-8 h-8 neo-card rounded-none flex items-center justify-center ${
                 isClient ? 'bg-gradient-to-br from-green-500 to-blue-600' : 'bg-gradient-to-br from-blue-500 to-purple-600'
               }`}>
-                {isClient ? <Eye className="w-7 h-7 text-white" /> : <Brain className="w-7 h-7 text-white" />}
+                {isClient ? <Eye className="w-4 h-4 text-white" /> : <Brain className="w-4 h-4 text-white" />}
               </div>
               <div>
-                <h2 className="text-xl font-black text-gray-900 uppercase tracking-tight">
+                <h2 className="text-sm font-black text-gray-900 uppercase tracking-tight">
                   {portalTitle}
                 </h2>
                 <p className="text-xs font-bold text-gray-600 uppercase tracking-wider">
@@ -361,28 +361,28 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
             </div>
           </SidebarHeader>
           
-          <SidebarContent className="p-4">
+          <SidebarContent className="p-2">
             <SidebarGroup>
-              <SidebarGroupLabel className="text-xs font-black text-gray-900 uppercase tracking-widest px-3 py-3 border-b-2 border-gray-300">
+              <SidebarGroupLabel className="text-xs font-black text-gray-900 uppercase tracking-widest px-2 py-2 border-b border-gray-300">
                 {sectionLabel}
               </SidebarGroupLabel>
-              <SidebarGroupContent className="mt-4">
-                <SidebarMenu className="space-y-2">
+              <SidebarGroupContent className="mt-2">
+                <SidebarMenu className="space-y-1">
                   {navItems.map((item) => {
                     const isActive = location.pathname === item.url;
                     return (
                       <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton 
                           asChild 
-                          className={`rounded-none font-bold uppercase tracking-wide transition-all duration-100 ${
+                          className={`rounded-none font-bold uppercase tracking-wide transition-all duration-100 text-xs ${
                             isActive 
                               ? 'neo-active text-white' 
-                              : 'hover:bg-white hover:border-2 hover:border-black hover:shadow-[4px_4px_0px_#000] hover:transform hover:translate-x-[-1px] hover:translate-y-[-1px]'
+                              : 'hover:bg-white hover:border hover:border-black hover:shadow-[2px_2px_0px_#000] hover:transform hover:translate-x-[-1px] hover:translate-y-[-1px]'
                           }`}
                         >
-                          <Link to={item.url} className="flex items-center gap-3 p-3">
-                            <item.icon className={`w-5 h-5 ${isActive ? 'text-white' : item.color}`} />
-                            <span className="text-sm">{item.title}</span>
+                          <Link to={item.url} className="flex items-center gap-2 p-2">
+                            <item.icon className={`w-4 h-4 ${isActive ? 'text-white' : item.color}`} />
+                            <span className="text-xs">{item.title}</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
@@ -393,12 +393,12 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
                   {isClient && (
                     <SidebarMenuItem>
                       <SidebarMenuButton 
-                        className="rounded-none font-bold uppercase tracking-wide transition-all duration-100 hover:bg-red-100 hover:border-2 hover:border-black hover:shadow-[4px_4px_0px_#000] hover:transform hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                        className="rounded-none font-bold uppercase tracking-wide transition-all duration-100 hover:bg-red-100 hover:border hover:border-black hover:shadow-[2px_2px_0px_#000] hover:transform hover:translate-x-[-1px] hover:translate-y-[-1px] text-xs"
                         onClick={handleLogout}
                       >
-                        <div className="flex items-center gap-3 p-3">
-                          <LogOut className="w-5 h-5 text-red-600" />
-                          <span className="text-sm text-red-600">Logout</span>
+                        <div className="flex items-center gap-2 p-2">
+                          <LogOut className="w-4 h-4 text-red-600" />
+                          <span className="text-xs text-red-600">Logout</span>
                         </div>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -408,13 +408,13 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
             </SidebarGroup>
           </SidebarContent>
           
-          <SidebarFooter className="p-4 border-t-4 border-black">
-            <div className={`flex items-center gap-3 p-3 neo-card text-white ${
+          <SidebarFooter className="p-2 border-t-2 border-black">
+            <div className={`flex items-center gap-2 p-2 neo-card text-white ${
               isClient ? 'bg-gradient-to-r from-green-500 to-blue-500' : 'bg-gradient-to-r from-purple-500 to-pink-500'
             }`}>
-              {isClient ? <Eye className="w-6 h-6" /> : <Brain className="w-6 h-6" />}
+              {isClient ? <Eye className="w-4 h-4" /> : <Brain className="w-4 h-4" />}
               <div>
-                <div className="text-sm font-black uppercase">
+                <div className="text-xs font-black uppercase">
                   {isClient ? 'CLIENT VIEW' : 'AI POWERED'}
                 </div>
                 <div className="text-xs font-bold opacity-80">
@@ -424,10 +424,10 @@ export default function AppLayout({ children, currentPageName }: AppLayoutProps)
             </div>
             
             {!isTeamMember && !isClient && (
-              <div className="mt-3 space-y-2">
+              <div className="mt-2">
                 <Link 
                   to={createPageUrl("TeamLogin")}
-                  className="block w-full p-2 text-center bg-gray-200 hover:bg-gray-300 border-2 border-black font-bold uppercase text-xs transition-colors"
+                  className="block w-full p-1 text-center bg-gray-200 hover:bg-gray-300 border border-black font-bold uppercase text-xs transition-colors"
                 >
                   TEAM LOGIN
                 </Link>

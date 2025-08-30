@@ -239,59 +239,59 @@ export default function ManagerStandupDashboard() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="neo-card bg-white border-4 border-black">
-          <CardContent className="p-4 text-center">
-            <Users className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-            <div className="text-2xl font-black text-gray-900">{completedStandups}/{totalTeamMembers}</div>
-            <div className="text-sm font-bold text-gray-600 uppercase">Stand-ups Complete</div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        <Card className="neo-card bg-white border-2 border-black">
+          <CardContent className="p-3 text-center">
+            <Users className="w-6 h-6 text-blue-600 mx-auto mb-1" />
+            <div className="text-lg font-black text-gray-900">{completedStandups}/{totalTeamMembers}</div>
+            <div className="text-xs font-bold text-gray-600 uppercase">Stand-ups Complete</div>
           </CardContent>
         </Card>
 
-        <Card className="neo-card bg-white border-4 border-black">
-          <CardContent className="p-4 text-center">
-            <TrendingUp className="w-8 h-8 text-green-600 mx-auto mb-2" />
-            <div className="text-2xl font-black text-gray-900">{averageMood.toFixed(1)}/10</div>
-            <div className="text-sm font-bold text-gray-600 uppercase">Team Mood</div>
+        <Card className="neo-card bg-white border-2 border-black">
+          <CardContent className="p-3 text-center">
+            <TrendingUp className="w-6 h-6 text-green-600 mx-auto mb-1" />
+            <div className="text-lg font-black text-gray-900">{averageMood.toFixed(1)}/10</div>
+            <div className="text-xs font-bold text-gray-600 uppercase">Team Mood</div>
           </CardContent>
         </Card>
 
-        <Card className="neo-card bg-white border-4 border-black">
-          <CardContent className="p-4 text-center">
-            <AlertTriangle className="w-8 h-8 text-red-600 mx-auto mb-2" />
-            <div className="text-2xl font-black text-gray-900">{totalBlockers}</div>
-            <div className="text-sm font-bold text-gray-600 uppercase">Active Blockers</div>
+        <Card className="neo-card bg-white border-2 border-black">
+          <CardContent className="p-3 text-center">
+            <AlertTriangle className="w-6 h-6 text-red-600 mx-auto mb-1" />
+            <div className="text-lg font-black text-gray-900">{totalBlockers}</div>
+            <div className="text-xs font-bold text-gray-600 uppercase">Active Blockers</div>
           </CardContent>
         </Card>
 
-        <Card className="neo-card bg-white border-4 border-black">
-          <CardContent className="p-4 text-center">
-            <Target className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-            <div className="text-2xl font-black text-gray-900">
+        <Card className="neo-card bg-white border-2 border-black">
+          <CardContent className="p-3 text-center">
+            <Target className="w-6 h-6 text-purple-600 mx-auto mb-1" />
+            <div className="text-lg font-black text-gray-900">
               {teamStandups.reduce((acc, s) => acc + s.completedTasks, 0)}
             </div>
-            <div className="text-sm font-bold text-gray-600 uppercase">Tasks Done Yesterday</div>
+            <div className="text-xs font-bold text-gray-600 uppercase">Tasks Done Yesterday</div>
           </CardContent>
         </Card>
       </div>
 
       {/* AI Insights Banner */}
-      <Card className="neo-card bg-gradient-to-r from-purple-500 to-blue-600 text-white border-4 border-black">
-        <CardContent className="p-6">
-          <div className="flex items-center gap-4">
-            <Brain className="w-12 h-12" />
+      <Card className="neo-card bg-gradient-to-r from-purple-500 to-blue-600 text-white border-2 border-black">
+        <CardContent className="p-4">
+          <div className="flex items-center gap-3">
+            <Brain className="w-8 h-8" />
             <div className="flex-1">
-              <h3 className="text-xl font-black uppercase mb-2">AI Team Insights</h3>
-              <p className="font-bold mb-2">
+              <h3 className="text-lg font-black uppercase mb-1">AI Team Insights</h3>
+              <p className="font-bold mb-2 text-sm">
                 Team productivity is at 85%. Mike needs DevOps support urgently. Alex is blocked by design review.
               </p>
               <div className="flex gap-2">
-                <Badge className="bg-white text-purple-700 font-black border-2 border-white">
+                <Badge className="bg-white text-purple-700 font-black border border-white text-xs">
                   2 URGENT ACTIONS
                 </Badge>
-                <Badge className="bg-yellow-400 text-purple-700 font-black border-2 border-yellow-400">
+                <Badge className="bg-yellow-400 text-purple-700 font-black border border-yellow-400 text-xs">
                   1 OVERDUE STANDUP
                 </Badge>
               </div>
@@ -300,47 +300,47 @@ export default function ManagerStandupDashboard() {
         </CardContent>
       </Card>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-4">
         {/* Team Stand-up Status */}
-        <Card className="neo-card bg-white border-4 border-black">
-          <CardHeader className="border-b-4 border-black">
-            <CardTitle className="flex items-center gap-3">
-              <MessageSquare className="w-6 h-6 text-blue-600" />
-              <span className="font-black uppercase">Team Stand-up Status</span>
+        <Card className="neo-card bg-white border-2 border-black">
+          <CardHeader className="border-b-2 border-black p-3">
+            <CardTitle className="flex items-center gap-2">
+              <MessageSquare className="w-5 h-5 text-blue-600" />
+              <span className="font-black uppercase text-sm">Team Stand-up Status</span>
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-6">
-            <div className="space-y-4">
+          <CardContent className="p-4">
+            <div className="space-y-3">
               {teamStandups.map((standup, index) => (
                 <motion.div
                   key={standup.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-4 border-4 border-gray-300 bg-gray-50"
+                  className="p-3 border-2 border-gray-300 bg-gray-50"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-black">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-black">
                         {standup.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
-                        <p className="font-black text-sm">{standup.name}</p>
+                        <p className="font-black text-xs">{standup.name}</p>
                         <p className="text-xs font-bold text-gray-600">{standup.role}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge className={`font-black text-xs border-2 border-black ${getStatusColor(standup.status)}`}>
+                    <div className="flex items-center gap-1">
+                      <Badge className={`font-black text-xs border border-black ${getStatusColor(standup.status)}`}>
                         {standup.status.toUpperCase()}
                       </Badge>
-                      <Badge className="bg-blue-500 text-white font-black text-xs border-2 border-black">
+                      <Badge className="bg-blue-500 text-white font-black text-xs border border-black">
                         {standup.moodRating}/10
                       </Badge>
                     </div>
                   </div>
 
                   {standup.status === 'completed' && (
-                    <div className="space-y-2 text-sm">
+                    <div className="space-y-1 text-xs">
                       <div>
                         <span className="font-black text-green-700">✅ Yesterday: </span>
                         <span className="font-bold">{standup.accomplishments}</span>
@@ -359,11 +359,11 @@ export default function ManagerStandupDashboard() {
                   )}
 
                   {standup.status === 'overdue' && (
-                    <div className="bg-red-50 p-3 border-4 border-red-300 text-center">
-                      <p className="font-black text-red-700 text-sm uppercase">No stand-up update provided</p>
+                    <div className="bg-red-50 p-2 border-2 border-red-300 text-center">
+                      <p className="font-black text-red-700 text-xs uppercase">No stand-up update provided</p>
                       <Button 
                         onClick={() => handleSendReminder(standup.id, standup.name)}
-                        className="neo-button bg-red-500 text-white font-black uppercase text-xs mt-2 border-2 border-black"
+                        className="neo-button bg-red-500 text-white font-black uppercase text-xs mt-1 border border-black"
                       >
                         SEND REMINDER
                       </Button>
@@ -376,25 +376,25 @@ export default function ManagerStandupDashboard() {
         </Card>
 
         {/* Active Blockers */}
-        <Card className="neo-card bg-white border-4 border-black">
-          <CardHeader className="border-b-4 border-black">
-            <CardTitle className="flex items-center gap-3">
-              <AlertTriangle className="w-6 h-6 text-red-600" />
-              <span className="font-black uppercase">Active Blockers</span>
+        <Card className="neo-card bg-white border-2 border-black">
+          <CardHeader className="border-b-2 border-black p-3">
+            <CardTitle className="flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5 text-red-600" />
+              <span className="font-black uppercase text-sm">Active Blockers</span>
               {highPriorityBlockers > 0 && (
-                <Badge className="bg-red-500 text-white font-black border-2 border-black">
+                <Badge className="bg-red-500 text-white font-black border border-black text-xs">
                   {highPriorityBlockers} HIGH PRIORITY
                 </Badge>
               )}
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-6">
-            <div className="space-y-4">
+          <CardContent className="p-4">
+            <div className="space-y-3">
               {teamBlockers.length === 0 ? (
-                <div className="text-center py-8">
-                  <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                  <p className="font-black text-green-700 uppercase">No Active Blockers!</p>
-                  <p className="text-sm font-bold text-gray-600">Team is running smoothly</p>
+                <div className="text-center py-6">
+                  <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
+                  <p className="font-black text-green-700 uppercase text-sm">No Active Blockers!</p>
+                  <p className="text-xs font-bold text-gray-600">Team is running smoothly</p>
                 </div>
               ) : (
                 teamBlockers.map((blocker, index) => (
@@ -403,34 +403,34 @@ export default function ManagerStandupDashboard() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-4 border-4 border-red-300 bg-red-50"
+                    className="p-3 border-2 border-red-300 bg-red-50"
                   >
-                    <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge className={`font-black text-xs border-2 border-black ${getBlockerPriorityColor(blocker.priority)}`}>
+                        <div className="flex items-center gap-1 mb-1">
+                          <Badge className={`font-black text-xs border border-black ${getBlockerPriorityColor(blocker.priority)}`}>
                             {blocker.priority.toUpperCase()}
                           </Badge>
-                          <span className="font-black text-sm text-gray-900">{blocker.memberName}</span>
+                          <span className="font-black text-xs text-gray-900">{blocker.memberName}</span>
                           {blocker.helpAssigned && (
-                            <Badge className="bg-orange-500 text-white font-black text-xs border-2 border-black">
+                            <Badge className="bg-orange-500 text-white font-black text-xs border border-black">
                               HELP ASSIGNED
                             </Badge>
                           )}
                         </div>
-                        <p className="text-sm font-bold text-gray-700 mb-2">{blocker.description}</p>
+                        <p className="text-xs font-bold text-gray-700 mb-1">{blocker.description}</p>
                         {blocker.suggestedSolution && (
-                          <div className="bg-blue-50 p-3 border-4 border-blue-300">
+                          <div className="bg-blue-50 p-2 border-2 border-blue-300">
                             <p className="text-xs font-black text-blue-800 mb-1">💡 AI SUGGESTION:</p>
                             <p className="text-xs font-bold text-blue-700">{blocker.suggestedSolution}</p>
                           </div>
                         )}
                       </div>
                     </div>
-                    <div className="flex gap-2 flex-wrap">
+                    <div className="flex gap-1 flex-wrap">
                       <Button 
                         onClick={() => handleResolveBlocker(blocker.id)}
-                        className="neo-button bg-green-500 text-white font-black uppercase text-xs border-2 border-black"
+                        className="neo-button bg-green-500 text-white font-black uppercase text-xs border border-black"
                       >
                         RESOLVE
                       </Button>
@@ -449,7 +449,7 @@ export default function ManagerStandupDashboard() {
                       {blocker.helpAssigned && (
                         <Button 
                           onClick={() => handleViewNotes(blocker)}
-                          className="neo-button bg-purple-500 text-white font-black uppercase text-xs border-2 border-black"
+                          className="neo-button bg-purple-500 text-white font-black uppercase text-xs border border-black"
                         >
                           <FileText className="w-3 h-3 mr-1" />
                           NOTES
@@ -459,7 +459,7 @@ export default function ManagerStandupDashboard() {
                       {!blocker.escalated && (
                         <Button 
                           onClick={() => handleEscalateBlocker(blocker.id)}
-                          className="neo-button bg-red-500 text-white font-black uppercase text-xs border-2 border-black"
+                          className="neo-button bg-red-500 text-white font-black uppercase text-xs border border-black"
                         >
                           ESCALATE
                         </Button>
@@ -474,21 +474,21 @@ export default function ManagerStandupDashboard() {
       </div>
 
       {/* Today's Team Plan */}
-      <Card className="neo-card bg-white border-4 border-black">
-        <CardHeader className="border-b-4 border-black">
-          <CardTitle className="flex items-center gap-3">
-            <Calendar className="w-6 h-6 text-purple-600" />
-            <span className="font-black uppercase">Today's Team Plan</span>
+      <Card className="neo-card bg-white border-2 border-black">
+        <CardHeader className="border-b-2 border-black p-3">
+          <CardTitle className="flex items-center gap-2">
+            <Calendar className="w-5 h-5 text-purple-600" />
+            <span className="font-black uppercase text-sm">Today's Team Plan</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <CardContent className="p-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {teamStandups.filter(s => s.status === 'completed').map(standup => (
-              <div key={standup.id} className="p-4 bg-blue-50 border-4 border-blue-300">
-                <h4 className="font-black text-blue-900 text-sm mb-2">{standup.name}</h4>
-                <p className="text-sm font-bold text-blue-700 mb-2">{standup.todaysPlan}</p>
+              <div key={standup.id} className="p-3 bg-blue-50 border-2 border-blue-300">
+                <h4 className="font-black text-blue-900 text-xs mb-1">{standup.name}</h4>
+                <p className="text-xs font-bold text-blue-700 mb-2">{standup.todaysPlan}</p>
                 <div className="flex items-center justify-between">
-                  <Badge className="bg-blue-500 text-white font-black text-xs border-2 border-black">
+                  <Badge className="bg-blue-500 text-white font-black text-xs border border-black">
                     {standup.estimatedHours}H PLANNED
                   </Badge>
                   <div className="flex items-center gap-1">
