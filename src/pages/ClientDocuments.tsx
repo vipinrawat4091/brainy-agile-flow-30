@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import {
   Music
 } from "lucide-react";
 import { DocumentViewer } from "@/components/client/DocumentViewer";
+// Import document upload component  
 import DocumentUpload from "@/components/client/DocumentUpload";
 
 export default function ClientDocuments() {
@@ -95,10 +97,10 @@ export default function ClientDocuments() {
   };
 
   const getFileIcon = (type) => {
-    if (type.includes('image')) return <Image className="w-4 h-4 text-blue-600" />;
-    if (type.includes('video')) return <Video className="w-4 h-4 text-purple-600" />;
-    if (type.includes('audio')) return <Music className="w-4 h-4 text-green-600" />;
-    return <FileText className="w-4 h-4 text-gray-600" />;
+    if (type.includes('image')) return <Image className="w-5 h-5 text-blue-600" />;
+    if (type.includes('video')) return <Video className="w-5 h-5 text-purple-600" />;
+    if (type.includes('audio')) return <Music className="w-5 h-5 text-green-600" />;
+    return <FileText className="w-5 h-5 text-gray-600" />;
   };
 
   const getCategoryColor = (category) => {
@@ -112,155 +114,118 @@ export default function ClientDocuments() {
     return colors[category] || "bg-gray-500 text-white border-gray-600";
   };
 
-  const filteredDocuments = [
-    {
-      id: "1",
-      name: "Project Requirements.pdf",
-      type: "application/pdf",
-      size: "2.5 MB",
-      uploadDate: "2024-12-15",
-      category: "Requirements",
-      url: "/placeholder.svg"
-    },
-    {
-      id: "2", 
-      name: "Design Mockups.zip",
-      type: "application/zip",
-      size: "15.2 MB",
-      uploadDate: "2024-12-14",
-      category: "Design",
-      url: "/placeholder.svg"
-    },
-    {
-      id: "3",
-      name: "User Manual.docx",
-      type: "application/msword",
-      size: "1.8 MB", 
-      uploadDate: "2024-12-13",
-      category: "Documentation",
-      url: "/placeholder.svg"
-    },
-    {
-      id: "4",
-      name: "Logo Assets.png",
-      type: "image/png",
-      size: "0.5 MB",
-      uploadDate: "2024-12-12",
-      category: "Assets",
-      url: "/placeholder.svg"
-    }
-  ].filter(doc => {
+  const filteredDocuments = documents.filter(doc => {
     const matchesSearch = doc.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = filterType === "all" || doc.category.toLowerCase() === filterType.toLowerCase();
     return matchesSearch && matchesFilter;
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen bg-gray-50 p-6">
       <style>{`
         .neo-card {
-          border: 2px solid #000000 !important;
-          box-shadow: 3px 3px 0px #000000 !important;
+          border: 4px solid #000000 !important;
+          box-shadow: 8px 8px 0px #000000 !important;
         }
         
         .neo-button {
-          border: 2px solid #000000 !important;
-          box-shadow: 2px 2px 0px #000000 !important;
+          border: 4px solid #000000 !important;
+          box-shadow: 6px 6px 0px #000000 !important;
           transition: all 0.1s ease !important;
         }
         
         .neo-button:hover {
-          transform: translate(-1px, -1px) !important;
-          box-shadow: 3px 3px 0px #000000 !important;
+          transform: translate(-2px, -2px) !important;
+          box-shadow: 8px 8px 0px #000000 !important;
         }
         
         .neo-input {
-          border: 1px solid #000000 !important;
-          box-shadow: 2px 2px 0px #000000 !important;
+          border: 3px solid #000000 !important;
+          box-shadow: 4px 4px 0px #000000 !important;
         }
       `}</style>
 
-      <div className="max-w-6xl mx-auto space-y-4">
-        {/* Header - Compact */}
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-tight mb-1">
+            <h1 className="text-4xl font-black text-gray-900 uppercase tracking-tight mb-2">
               PROJECT DOCUMENTS
             </h1>
-            <p className="text-sm font-semibold text-gray-600 uppercase">
-              MANAGE & ACCESS FILES
+            <p className="text-lg font-bold text-gray-600 uppercase tracking-wide">
+              MANAGE & ACCESS YOUR FILES
             </p>
           </div>
           <Button 
             onClick={() => setShowUpload(true)}
-            className="neo-button bg-blue-500 text-white font-bold text-sm px-4 py-2"
+            className="neo-button bg-blue-500 text-white font-black uppercase"
           >
-            <Upload className="w-4 h-4 mr-1" />
-            UPLOAD
+            <Upload className="w-4 h-4 mr-2" />
+            UPLOAD DOCUMENT
           </Button>
         </div>
 
-        {/* Search and Filter - Compact */}
+        {/* Search and Filter */}
         <Card className="neo-card bg-white">
-          <CardContent className="p-4">
-            <div className="flex gap-3">
+          <CardContent className="p-6">
+            <div className="flex gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   placeholder="Search documents..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="neo-input pl-9 font-medium text-sm"
+                  className="neo-input pl-10 font-bold"
                 />
               </div>
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="neo-input font-medium px-3 py-2 text-sm"
+                className="neo-input font-bold px-4 py-2"
               >
-                <option value="all">ALL</option>
+                <option value="all">ALL CATEGORIES</option>
                 <option value="requirements">REQUIREMENTS</option>
                 <option value="design">DESIGN</option>
-                <option value="documentation">DOCS</option>
+                <option value="documentation">DOCUMENTATION</option>
                 <option value="assets">ASSETS</option>
               </select>
             </div>
           </CardContent>
         </Card>
 
-        {/* Documents Grid - Compact */}
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        {/* Documents Grid */}
+        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredDocuments.map((doc) => (
-            <Card key={doc.id} className="neo-card bg-white hover:transform hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all">
-              <CardHeader className="border-b border-black pb-2">
-                <CardTitle className="text-sm font-black uppercase flex items-center gap-2">
+            <Card key={doc.id} className="neo-card bg-white hover:transform hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
+              <CardHeader className="border-b-4 border-black">
+                <CardTitle className="text-lg font-black uppercase flex items-center gap-2">
                   {getFileIcon(doc.type)}
                   <span className="truncate">{doc.name}</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-3 space-y-3">
+              <CardContent className="p-4 space-y-4">
                 <div className="flex items-center justify-between">
-                  <Badge className={`font-bold text-xs border border-black shadow-[1px_1px_0px_#000] ${getCategoryColor(doc.category)}`}>
+                  <Badge className={`font-black text-xs border-2 border-black shadow-[2px_2px_0px_#000] ${getCategoryColor(doc.category)}`}>
                     {doc.category.toUpperCase()}
                   </Badge>
-                  <span className="text-xs font-medium text-gray-500">{doc.size}</span>
+                  <span className="text-sm font-bold text-gray-500">{doc.size}</span>
                 </div>
                 
-                <div className="text-xs font-medium text-gray-600">
-                  {doc.uploadDate}
+                <div className="text-sm font-bold text-gray-600">
+                  Uploaded: {doc.uploadDate}
                 </div>
 
                 <div className="flex gap-2">
                   <Button
                     onClick={() => handleView(doc)}
-                    className="neo-button bg-green-500 text-white font-bold text-xs flex-1 py-1"
+                    className="neo-button bg-green-500 text-white font-black uppercase text-xs flex-1"
                   >
                     <Eye className="w-3 h-3 mr-1" />
                     VIEW
                   </Button>
                   <Button
                     onClick={() => handleDownload(doc)}
-                    className="neo-button bg-blue-500 text-white font-bold text-xs flex-1 py-1"
+                    className="neo-button bg-blue-500 text-white font-black uppercase text-xs flex-1"
                   >
                     <Download className="w-3 h-3 mr-1" />
                     DOWNLOAD
@@ -273,14 +238,14 @@ export default function ClientDocuments() {
 
         {filteredDocuments.length === 0 && (
           <Card className="neo-card bg-white">
-            <CardContent className="p-8 text-center">
-              <Folder className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-              <h3 className="text-lg font-black text-gray-500 uppercase mb-2">
+            <CardContent className="p-12 text-center">
+              <Folder className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-xl font-black text-gray-500 uppercase mb-2">
                 NO DOCUMENTS FOUND
               </h3>
-              <p className="text-gray-400 font-medium text-sm">
+              <p className="text-gray-400 font-bold">
                 {searchTerm || filterType !== "all" 
-                  ? "Try adjusting your search or filter"
+                  ? "Try adjusting your search or filter criteria"
                   : "Upload your first document to get started"
                 }
               </p>

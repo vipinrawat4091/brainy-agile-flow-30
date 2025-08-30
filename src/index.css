@@ -6,103 +6,85 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 219 100% 56%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96%;
+    --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 210 40% 98%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
-    --destructive: 0 84% 60%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 219 100% 56%;
-    --radius: 0.75rem;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 9%;
-    --sidebar-primary: 219 100% 56%;
+    --sidebar-foreground: 0 0% 3.9%;
+    --sidebar-primary: 0 0% 9%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent: 0 0% 96.1%;
     --sidebar-accent-foreground: 0 0% 9%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 219 100% 56%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-ring: 0 0% 3.9%;
     
-    /* Material Design Colors */
-    --md-primary: 219 100% 56%;
-    --md-primary-variant: 219 100% 46%;
-    --md-secondary: 45 100% 51%;
-    --md-secondary-variant: 45 100% 41%;
-    --md-surface: 0 0% 100%;
-    --md-surface-variant: 0 0% 96%;
-    --md-background: 0 0% 98%;
-    --md-error: 0 84% 60%;
-    --md-on-primary: 0 0% 100%;
-    --md-on-secondary: 0 0% 0%;
-    --md-on-surface: 0 0% 9%;
-    --md-on-background: 0 0% 9%;
-    --md-on-error: 0 0% 100%;
-    --md-outline: 0 0% 74%;
-    --md-outline-variant: 0 0% 84%;
-
-    /* Material Design with opacity variants */
-    --md-primary-12: 219 100% 56% / 0.12;
-    --md-primary-8: 219 100% 56% / 0.08;
+    /* Neo Brutalism Colors */
+    --neo-blue: 210 100% 50%;
+    --neo-orange: 25 100% 50%;
+    --neo-green: 142 76% 36%;
+    --neo-pink: 327 100% 50%;
+    --neo-purple: 270 100% 50%;
+    --neo-cyan: 174 100% 50%;
+    --neo-black: 0 0% 0%;
+    --neo-white: 0 0% 100%;
+    --neo-gray: 0 0% 50%;
+    --neo-light-gray: 210 17% 95%;
   }
 
   .dark {
-    --background: 0 0% 9%;
+    --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 12%;
+    --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 9%;
+    --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 219 100% 66%;
+    --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 15%;
+    --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;
-    --accent: 0 0% 15%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 219 100% 66%;
-    --sidebar-background: 0 0% 9%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 0 0% 3.9%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 219 100% 66%;
+    --sidebar-primary: 0 0% 98%;
     --sidebar-primary-foreground: 0 0% 9%;
-    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent: 0 0% 14.9%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 219 100% 66%;
-    
-    --md-primary: 219 100% 66%;
-    --md-primary-variant: 219 100% 56%;
-    --md-secondary: 45 100% 61%;
-    --md-secondary-variant: 45 100% 51%;
-    --md-surface: 0 0% 12%;
-    --md-surface-variant: 0 0% 15%;
-    --md-background: 0 0% 9%;
-    --md-error: 0 84% 70%;
-    --md-on-primary: 0 0% 0%;
-    --md-on-secondary: 0 0% 0%;
-    --md-on-surface: 0 0% 98%;
-    --md-on-background: 0 0% 98%;
-    --md-on-error: 0 0% 0%;
-    --md-outline: 0 0% 64%;
-    --md-outline-variant: 0 0% 45%;
-
-    --md-primary-12: 219 100% 66% / 0.12;
-    --md-primary-8: 219 100% 66% / 0.08;
+    --sidebar-border: 0 0% 14.9%;
+    --sidebar-ring: 0 0% 83.1%;
   }
 }
 
@@ -110,303 +92,49 @@
   * {
     @apply border-border;
   }
-  
   body {
     @apply bg-background text-foreground;
-    font-family: 'Google Sans', 'Roboto', 'Inter', system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Google Sans', 'Roboto', system-ui, sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.01em;
   }
 }
 
 @layer components {
-  /* Material Design Elevation System */
-  .md-elevation-0 {
-    box-shadow: none;
+  .neo-button {
+    @apply border-4 border-black font-bold transition-all duration-100;
+    box-shadow: 8px 8px 0px hsl(var(--neo-black));
   }
   
-  .md-elevation-1 {
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  .neo-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0px hsl(var(--neo-black));
   }
   
-  .md-elevation-2 {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  }
-  
-  .md-elevation-3 {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-  
-  .md-elevation-4 {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-  
-  .md-elevation-5 {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  .neo-card {
+    @apply border-4 border-black;
+    box-shadow: 8px 8px 0px hsl(var(--neo-black));
   }
 
-  /* Material Design Cards */
-  .md-card {
-    @apply bg-md-surface border-0 rounded-2xl md-elevation-1 transition-all duration-200;
-  }
-  
-  .md-card:hover {
-    @apply md-elevation-3;
-    transform: translateY(-2px);
-  }
-  
-  .md-card-elevated {
-    @apply md-card md-elevation-2;
-  }
-  
-  .md-card-elevated:hover {
-    @apply md-elevation-4;
-    transform: translateY(-4px);
+  .neo-input {
+    @apply border-2 border-black font-bold;
+    box-shadow: 4px 4px 0px hsl(var(--neo-black));
   }
 
-  /* Material Design Buttons */
-  .md-button {
-    @apply inline-flex items-center justify-center rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-md-primary disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden;
-  }
-  
-  .md-button::before {
-    content: '';
-    @apply absolute inset-0 bg-current transition-opacity duration-200 rounded-full;
-    opacity: 0;
-  }
-  
-  .md-button:hover::before {
-    opacity: 0.08;
-  }
-  
-  .md-button:active {
-    transform: scale(0.98);
-  }
-  
-  .md-button-filled {
-    @apply md-button bg-md-primary text-md-on-primary h-10 px-6 md-elevation-2;
-  }
-  
-  .md-button-filled:hover {
-    @apply md-elevation-4;
-  }
-  
-  .md-button-outlined {
-    @apply md-button border border-md-outline bg-transparent text-md-primary h-10 px-6;
-  }
-  
-  .md-button-text {
-    @apply md-button bg-transparent text-md-primary h-10 px-4;
-  }
-  
-  .md-button-fab {
-    @apply md-button bg-md-primary text-md-on-primary w-14 h-14 rounded-full md-elevation-3;
-  }
-  
-  .md-button-fab:hover {
-    @apply md-elevation-5;
+  .neo-sidebar {
+    @apply border-r-4 border-black;
+    background: linear-gradient(135deg, hsl(var(--neo-light-gray)) 0%, #e9ecef 100%);
   }
 
-  /* Material Design Input Fields */
-  .md-input {
-    @apply w-full rounded-lg border border-md-outline bg-md-surface px-4 py-3 text-sm transition-all duration-200 focus:border-md-primary focus:outline-none focus:ring-2;
-    focus:ring-color: hsl(var(--md-primary) / 0.2);
-  }
-  
-  .md-input-outlined {
-    @apply md-input border-2;
-  }
-  
-  .md-input-filled {
-    @apply md-input bg-md-surface-variant border-0 border-b-2 border-md-outline rounded-b-none rounded-t-lg focus:border-md-primary;
+  .neo-active {
+    @apply text-white border-2 border-black;
+    background: hsl(var(--neo-blue));
+    box-shadow: 4px 4px 0px hsl(var(--neo-black));
+    transform: translate(-1px, -1px);
   }
 
-  /* Material Design Navigation */
-  .md-nav-rail {
-    @apply bg-md-surface border-r border-md-outline md-elevation-0 transition-all duration-300;
-  }
-  
-  .md-nav-drawer {
-    @apply bg-md-surface md-elevation-2 transition-all duration-300;
-  }
-  
-  .md-nav-item {
-    @apply flex items-center gap-3 px-4 py-3 rounded-full text-sm font-medium transition-all duration-200 relative overflow-hidden;
-  }
-  
-  .md-nav-item::before {
-    content: '';
-    @apply absolute inset-0 bg-md-primary transition-all duration-200 rounded-full;
-    opacity: 0;
-  }
-  
-  .md-nav-item:hover::before {
-    opacity: 0.08;
-  }
-  
-  .md-nav-item.active {
-    background-color: hsl(var(--md-primary-12));
-    @apply text-md-primary;
-  }
-  
-  .md-nav-item.active::before {
-    opacity: 0.12;
+  .ai-primary {
+    background: linear-gradient(135deg, hsl(var(--neo-blue)) 0%, hsl(var(--neo-purple)) 100%);
   }
 
-  /* Material Design Typography */
-  .md-headline-large {
-    @apply text-4xl font-normal tracking-tight;
+  .quantum-boost {
+    background: linear-gradient(135deg, hsl(var(--neo-purple)) 0%, hsl(var(--neo-pink)) 100%);
   }
-  
-  .md-headline-medium {
-    @apply text-3xl font-normal tracking-tight;
-  }
-  
-  .md-headline-small {
-    @apply text-2xl font-normal tracking-tight;
-  }
-  
-  .md-title-large {
-    @apply text-xl font-medium;
-  }
-  
-  .md-title-medium {
-    @apply text-lg font-medium;
-  }
-  
-  .md-title-small {
-    @apply text-base font-medium;
-  }
-  
-  .md-body-large {
-    @apply text-base leading-relaxed;
-  }
-  
-  .md-body-medium {
-    @apply text-sm leading-relaxed;
-  }
-  
-  .md-body-small {
-    @apply text-xs leading-relaxed;
-  }
-  
-  .md-label-large {
-    @apply text-sm font-medium;
-  }
-  
-  .md-label-medium {
-    @apply text-xs font-medium uppercase tracking-wider;
-  }
-  
-  .md-label-small {
-    @apply text-xs font-medium uppercase tracking-wider;
-  }
-
-  /* Material Design Surfaces */
-  .md-surface {
-    @apply bg-md-surface text-md-on-surface;
-  }
-  
-  .md-surface-variant {
-    @apply bg-md-surface-variant text-md-on-surface;
-  }
-  
-  .md-surface-container {
-    @apply bg-md-surface md-elevation-1 rounded-2xl;
-  }
-  
-  .md-surface-container-low {
-    @apply bg-md-surface md-elevation-0 rounded-2xl;
-  }
-  
-  .md-surface-container-high {
-    @apply bg-md-surface md-elevation-3 rounded-2xl;
-  }
-
-  /* Floating Action Button */
-  .md-fab {
-    @apply fixed bottom-6 right-6 w-16 h-16 bg-md-primary text-md-on-primary rounded-full md-elevation-3 transition-all duration-200 flex items-center justify-center;
-  }
-  
-  .md-fab:hover {
-    @apply md-elevation-5;
-    transform: scale(1.05);
-  }
-
-  /* Material Design List */
-  .md-list {
-    @apply bg-md-surface rounded-2xl md-elevation-1;
-  }
-  
-  .md-list-item {
-    @apply flex items-center gap-4 px-6 py-4 transition-colors duration-200 hover:bg-md-surface-variant border-b border-md-outline last:border-b-0;
-  }
-  
-  .md-list-item:first-child {
-    @apply rounded-t-2xl;
-  }
-  
-  .md-list-item:last-child {
-    @apply rounded-b-2xl;
-  }
-
-  /* Material Design Chips */
-  .md-chip {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border border-md-outline;
-  }
-  
-  .md-chip-filled {
-    @apply md-chip bg-md-primary text-md-on-primary border-md-primary;
-  }
-  
-  .md-chip-outlined {
-    @apply md-chip bg-transparent text-md-on-surface;
-  }
-
-  /* Material Design Dividers */
-  .md-divider {
-    @apply border-0 h-px bg-md-outline my-6;
-  }
-  
-  .md-divider-vertical {
-    @apply border-0 w-px bg-md-outline mx-6 h-full;
-  }
-}
-
-@layer utilities {
-  .bg-md-primary { @apply bg-[hsl(var(--md-primary))]; }
-  .bg-md-primary-variant { @apply bg-[hsl(var(--md-primary-variant))]; }
-  .bg-md-secondary { @apply bg-[hsl(var(--md-secondary))]; }
-  .bg-md-secondary-variant { @apply bg-[hsl(var(--md-secondary-variant))]; }
-  .bg-md-surface { @apply bg-[hsl(var(--md-surface))]; }
-  .bg-md-surface-variant { @apply bg-[hsl(var(--md-surface-variant))]; }
-  .bg-md-background { @apply bg-[hsl(var(--md-background))]; }
-  .bg-md-error { @apply bg-[hsl(var(--md-error))]; }
-  
-  .text-md-primary { @apply text-[hsl(var(--md-primary))]; }
-  .text-md-primary-variant { @apply text-[hsl(var(--md-primary-variant))]; }
-  .text-md-secondary { @apply text-[hsl(var(--md-secondary))]; }
-  .text-md-secondary-variant { @apply text-[hsl(var(--md-secondary-variant))]; }
-  .text-md-on-primary { @apply text-[hsl(var(--md-on-primary))]; }
-  .text-md-on-secondary { @apply text-[hsl(var(--md-on-secondary))]; }
-  .text-md-on-surface { @apply text-[hsl(var(--md-on-surface))]; }
-  .text-md-on-background { @apply text-[hsl(var(--md-on-background))]; }
-  .text-md-on-error { @apply text-[hsl(var(--md-on-error))]; }
-  .text-md-outline { @apply text-[hsl(var(--md-outline))]; }
-  .text-md-outline-variant { @apply text-[hsl(var(--md-outline-variant))]; }
-  
-  .border-md-outline { @apply border-[hsl(var(--md-outline))]; }
-  .border-md-outline-variant { @apply border-[hsl(var(--md-outline-variant))]; }
-  .border-md-primary { @apply border-[hsl(var(--md-primary))]; }
-  
-  .opacity-8 { opacity: 0.08; }
-  .opacity-12 { opacity: 0.12; }
 }
